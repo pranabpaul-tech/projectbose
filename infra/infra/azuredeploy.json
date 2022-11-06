@@ -51,7 +51,7 @@
   "resources": [
     {
       "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2020-08-01",
+      "apiVersion": "2022-07-01",
       "name": "[parameters('virtualNetwork_name')]",
       "location": "[parameters('deployment_location')]",
       "properties": {
@@ -80,7 +80,7 @@
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2020-11-01",
+      "apiVersion": "2021-09-01",
       "name": "[concat(parameters('virtualNetwork_name'), '/' , parameters('subnet_name'))]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetwork_name'))]"
@@ -94,7 +94,7 @@
     },
     {
       "type": "Microsoft.ContainerRegistry/registries",
-      "apiVersion": "2020-11-01-preview",
+      "apiVersion": "2021-09-01",
       "name": "[parameters('registries_name')]",
       "location": "[parameters('deployment_location')]",
       "sku": {
@@ -129,14 +129,14 @@
         {
           "name": "[concat('Microsoft.Authorization/', guid(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), variables('acrPullRole')))]",
           "type": "providers/roleAssignments",
-          "apiVersion": "2020-04-01-preview",
+          "apiVersion": "2022-07-01",
           "dependsOn": [
             "[resourceId('Microsoft.ContainerRegistry/registries', parameters('registries_name'))]",
             "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name'))]"
           ],
           "properties": {
             "roleDefinitionId": "[variables('acrPullRole')]",
-            "principalId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), '2020-12-01').identityProfile.kubeletidentity.objectId]",
+            "principalId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), '2022-07-01').identityProfile.kubeletidentity.objectId]",
             "principalType": "ServicePrincipal"
           }
         }
@@ -144,7 +144,7 @@
     },
     {
       "type": "Microsoft.ContainerService/managedClusters",
-      "apiVersion": "2021-05-01",
+      "apiVersion": "2022-09-01",
       "name": "[parameters('managedCluster_name')]",
       "location": "[parameters('cluster_deployment_location')]",
       "dependsOn": [
@@ -225,9 +225,9 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2021-04-01-preview",
+      "apiVersion": "2022-07-01",
       "name": "[concat(parameters('vault_name'), '/mysqlpass')]",
-      "location": "northeurope",
+      "location": "westeurope",
       "dependsOn": [
         "[resourceId('Microsoft.KeyVault/vaults', parameters('vault_name'))]"
       ],
