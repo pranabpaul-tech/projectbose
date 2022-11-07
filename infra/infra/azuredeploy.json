@@ -58,7 +58,7 @@
   "resources": [
     {
       "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2022-05-01",
+      "apiVersion": "2022-01-01",
       "name": "[parameters('virtualNetwork_name')]",
       "location": "[parameters('deployment_location')]",
       "properties": {
@@ -87,7 +87,7 @@
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2022-05-01",
+      "apiVersion": "2022-01-01",
       "name": "[concat(parameters('virtualNetwork_name'), '/' , parameters('subnet_name'))]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetwork_name'))]"
@@ -101,7 +101,7 @@
     },
     {
       "type": "Microsoft.ContainerRegistry/registries",
-      "apiVersion": "2021-09-01",
+      "apiVersion": "2022-02-01-preview",
       "name": "[parameters('registries_name')]",
       "location": "[parameters('deployment_location')]",
       "sku": {
@@ -136,7 +136,7 @@
         {
           "name": "[concat('Microsoft.Authorization/', guid(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), variables('acrPullRole')))]",
           "type": "providers/roleAssignments",
-          "apiVersion": "2022-07-01",
+          "apiVersion": "2022-04-01",
           "dependsOn": [
             "[resourceId('Microsoft.ContainerRegistry/registries', parameters('registries_name'))]",
             "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name'))]"
@@ -265,7 +265,6 @@
         "accessPolicies": [
           {
             "tenantId": "[subscription().tenantid]",
-            //"objectId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')),'2019-08-01', 'full').identity.principalId]",
             "objectId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), '2022-07-01').identityProfile.kubeletidentity.objectId]",
             "permissions": {
               "keys": [
