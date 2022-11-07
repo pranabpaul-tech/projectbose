@@ -45,11 +45,11 @@
     },
     "adminPassword": {
       "defaultValue": "azureuser@12345",
-      "type": "String"
+      "type": "secureString"
     },
     "adminUsername": {
       "defaultValue": "azureuser",
-      "type": "String"
+      "type": "secureString"
     }
   },
   "variables": {
@@ -194,7 +194,7 @@
           }
         ],
         "linuxProfile": {
-          "adminUsername": "azureuser",
+          "adminUsername": [ "parameters('adminUsername')" ],
           "ssh": {
             "publicKeys": [
               {
@@ -204,8 +204,8 @@
           }
         },
         "windowsProfile": {
-          "adminUsername": "azureuser",
-          "adminPassword": "azureuser@12345",
+          "adminUsername": [ "parameters('adminUsername')" ],
+          "adminPassword": [ "parameters('adminPassword')" ],
           "enableCSIProxy": true
         },
         "servicePrincipalProfile": {

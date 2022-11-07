@@ -1,1 +1,4 @@
+C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\bin\Debug\azuredeploy.json
+C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\bin\Debug\azuredeploy.parameters.json
+C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\bin\Debug\Deploy-AzureResourceGroup.ps1
 C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\obj\Debug\infra.deployproj.CoreCompileInputs.cache
