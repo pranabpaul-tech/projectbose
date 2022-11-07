@@ -42,8 +42,15 @@
     },
     "staticSites_name": {
       "type": "String"
+    },
+    "adminPassword": {
+      "defaultValue": "azureuser@12345",
+      "type": "secureString"
+    },
+    "adminUsername": {
+      "defaultValue": "azureuser",
+      "type": "secureString"
     }
-
   },
   "variables": {
     "acrPullRole": "[concat(subscription().Id, '/providers/Microsoft.Authorization/roleDefinitions/7f951dda-4ed3-4680-a7ca-43fe172d538d')]"
@@ -187,7 +194,7 @@
           }
         ],
         "linuxProfile": {
-          "adminUsername": "azureuser",
+          "adminUsername": [ "parameters('adminUsername')" ],
           "ssh": {
             "publicKeys": [
               {
@@ -197,8 +204,8 @@
           }
         },
         "windowsProfile": {
-          "adminUsername": "azureuser",
-          "adminPassword": "azureuser@12345",
+          "adminUsername": [ "parameters('adminUsername')" ],
+          "adminPassword": [ "parameters('adminPassword')" ],
           "enableCSIProxy": true
         },
         "servicePrincipalProfile": {
