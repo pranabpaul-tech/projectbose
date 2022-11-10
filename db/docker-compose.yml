@@ -6,3 +6,8 @@ services:
             dockerfile: Dockerfile
         command: --default-authentication-plugin=mysql_native_password
         restart: always
+    cassandradb:
+        build:
+            context: ./cassandra/
+            dockerfile: Dockerfile
+        restart: always
