@@ -16,7 +16,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/src/mysql" -f  "src/mysql/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-mysql --label dockerfile-path=src/mysql/Dockerfile
+        docker build "$GITHUB_WORKSPACE/db/mysql" -f  "db/mysql/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-mysql --label dockerfile-path=db/mysql/Dockerfile
         docker push projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-mysql
     - uses: azure/k8s-set-context@v1
       with:
