@@ -1,38 +1,30 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysqlset
+  name: cassandraset
 spec:
-  serviceName: mysqlservice
+  serviceName: cassandraservice
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app: cassandra
   template:
     metadata:
       labels:
-        app: mysql
+        app: cassandra
     spec:
       containers:
-      - name: mysql-container
-        #image: mysql
+      - name: cassandra-container
         image: projectboseacr.azurecr.io/projectboseaks
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          # value: password
-          valueFrom:
-            secretKeyRef:
-              name: mysqlsecret
-              key: rootpass
         ports:
-        - containerPort: 3306
-          name: mysqlport
+        - containerPort: 9160
+          name: cassandraport
         volumeMounts:
-        - name: mysql-vol
-          mountPath: /var/lib/mysql
+        - name: cassandra-vol
+          mountPath: /var/lib/cassandra
   volumeClaimTemplates:
   - metadata:
-      name: mysql-vol
+      name: cassandra-vol
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
