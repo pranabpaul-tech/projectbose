@@ -1,4 +1,3 @@
-
 use mydb;
 
 create table level(
