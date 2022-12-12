@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourcedetailsAPI.csproj": {}
+    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourceDetailsAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourcedetailsAPI.csproj": {
+    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourceDetailsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourcedetailsAPI.csproj",
-        "projectName": "ResourcedetailsAPI",
-        "projectPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourcedetailsAPI.csproj",
+        "projectUniqueName": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourceDetailsAPI.csproj",
+        "projectName": "ResourceDetailsAPI",
+        "projectPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourceDetailsAPI.csproj",
         "packagesPath": "C:\\Users\\pranabp\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\obj\\",
         "projectStyle": "PackageReference",
