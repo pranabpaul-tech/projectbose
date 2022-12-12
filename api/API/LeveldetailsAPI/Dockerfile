@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["LeveldetailsAPI/LeveldetailsAPI.csproj", "LeveldetailsAPI/"]
+COPY ["LeveldetailsAPI.csproj", "LeveldetailsAPI/"]
 RUN dotnet restore "LeveldetailsAPI/LeveldetailsAPI.csproj"
-COPY . .
+COPY . "/src/LeveldetailsAPI"
 WORKDIR "/src/LeveldetailsAPI"
 RUN dotnet build "LeveldetailsAPI.csproj" -c Release -o /app/build
 

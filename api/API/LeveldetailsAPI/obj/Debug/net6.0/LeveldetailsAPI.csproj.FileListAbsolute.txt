@@ -66,3 +66,12 @@ C:\Users\pranabp\source\repos\projectbose\api\API\LeveldetailsAPI\obj\Debug\net6
 C:\Users\pranabp\source\repos\projectbose\api\API\LeveldetailsAPI\obj\Debug\net6.0\LeveldetailsAPI.pdb
 C:\Users\pranabp\source\repos\projectbose\api\API\LeveldetailsAPI\obj\Debug\net6.0\LeveldetailsAPI.genruntimeconfig.cache
 C:\Users\pranabp\source\repos\projectbose\api\API\LeveldetailsAPI\obj\Debug\net6.0\ref\LeveldetailsAPI.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\pranabp\source\repos\projectbose\api\api\LeveldetailsAPI\bin\Debug\net6.0\System.Memory.Data.dll
