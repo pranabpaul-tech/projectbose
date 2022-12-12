@@ -1,6 +1,7 @@
 on: [push]
 env: 
   NAMESPACE: staging
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
