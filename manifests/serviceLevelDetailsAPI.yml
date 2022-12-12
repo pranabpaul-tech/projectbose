@@ -4,6 +4,7 @@ metadata:
     name: "leveldetailsservice"
     labels:
         app: "leveldetailsdeploy"
+
 spec:
     type: LoadBalancer
     ports:

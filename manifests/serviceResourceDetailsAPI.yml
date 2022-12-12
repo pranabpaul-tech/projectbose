@@ -4,6 +4,7 @@ metadata:
     name: "resourcedetailsservice"
     labels:
         app: "resourcedetailsdeploy"
+
 spec:
     type: LoadBalancer
     ports:
