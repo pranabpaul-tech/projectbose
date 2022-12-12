@@ -24,8 +24,10 @@ internal class Program
             configuration.AddAzureKeyVault(
                 new Uri($"https://{configuration["KeyVaultName"]}.vault.azure.net/"),
                 new DefaultAzureCredential());
+            builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLRemoteConection")));
         }
-        builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLRemoteConection")));
+        else
+            builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLLocalConnection")));
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
