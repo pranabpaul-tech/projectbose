@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "resourcedetailsdeploy"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "resourcedetailsdeploy"
+  template:
+    metadata:
+      labels:
+        app: "resourcedetailsdeploy"
+    spec:
+      containers:
+        - name: "resourcedetailsdeploy"
+          image: "projectboseacr.azurecr.io/projectboseaks"
+          ports:
+          - containerPort: 80
