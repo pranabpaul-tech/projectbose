@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AKI971YbyGFZIj9aq7hCGlYCBlnG/BXeK/6HuPX1up4sVNDgPVPbxoKNBaIi1UHsOSH4oEpX7zHv5dwq44mCsw==",
+  "dgSpecHash": "Gqm+hAMxYfglQXhH0rkjJ4VgAFZOqfg8fw0CeNxGaMtMgi4yqOsDzk1IG/F67qAwl2qzfl7L1/nuUCDW3h8HRA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourceDetailsAPI.csproj",
+  "projectFilePath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\ResourcedetailsAPI\\ResourcedetailsAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pranabp\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\pranabp\\.nuget\\packages\\azure.extensions.aspnetcore.configuration.secrets\\1.2.2\\azure.extensions.aspnetcore.configuration.secrets.1.2.2.nupkg.sha512",

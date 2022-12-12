@@ -16,7 +16,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/api/API/ResourceDetailsAPI" -f  "api/API/ResourceDetailsAPI/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }} --label dockerfile-path=api/API/ResourceDetailsAPI/Dockerfile
+        docker build "$GITHUB_WORKSPACE/api/API/ResourcedetailsAPI" -f  "api/API/ResourcedetailsAPI/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }} --label dockerfile-path=api/API/ResourcedetailsAPI/Dockerfile
         docker push projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}
     
     - uses: azure/k8s-set-context@v1
@@ -44,8 +44,8 @@ jobs:
       with:
         namespace: ${{ env.NAMESPACE  }}
         manifests: |
-          manifests/deployResourceDetailsAPI.yml
-          manifests/serviceResourceDetailsAPI.yml
+          manifests/deployResourcedetailsAPI.yml
+          manifests/serviceResourcedetailsAPI.yml
         images: |
           projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}
         imagepullsecrets: |

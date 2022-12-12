@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LevelDetailsAPI.csproj": {}
+    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LeveldetailsAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LevelDetailsAPI.csproj": {
+    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LeveldetailsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LevelDetailsAPI.csproj",
-        "projectName": "LevelDetailsAPI",
-        "projectPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LevelDetailsAPI.csproj",
+        "projectUniqueName": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LeveldetailsAPI.csproj",
+        "projectName": "LeveldetailsAPI",
+        "projectPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\LeveldetailsAPI.csproj",
         "packagesPath": "C:\\Users\\pranabp\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\LeveldetailsAPI\\obj\\",
         "projectStyle": "PackageReference",
