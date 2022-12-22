@@ -29,8 +29,11 @@
     "managedCluster_name": {
       "value": "projectboseaks"
     },
-    "keysecret_Value": {
-      "value": "password123"
+    "Mykeysecret_Value": {
+      "value": "server=mysqlservice;port=3306;user=aksuser;password=password123;database=mydb;CharSet=utf8"
+    },
+    "Cassandrakeysecret_Value": {
+      "value": "server=cassabdraservice;port=9160;user=aksuser;password=password123;keyspace=azuredata"
     },
     "staticSites_name": {
       "value": "projectbosewebapp"
