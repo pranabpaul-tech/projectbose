@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.5",
+  "parameters": {
+    "subscription_id": {
+      "value": "118ae9f9-9038-414c-ba64-08c5056602d1"
+    },
+    "vault_name": {
+      "value": "projectbosekeyvault"
+    },
+    "virtualNetwork_name": {
+      "value": "projectbosevnet"
+    },
+    "subnet_name": {
+      "value": "projectbosesubnet"
+    },
+    "addressPrefixes_vnet": {
+      "value": "10.0.0.0/16"
+    },
+    "addressPrefixes_subnet": {
+      "value": "10.0.0.0/24"
+    },
+    "registries_name": {
+      "value": "projectboseacr"
+    },
+    "registries_sku": {
+      "value": "Standard"
+    },
+    "managedCluster_name": {
+      "value": "projectboseaks"
+    },
+    "Mykeysecret_Value": {
+      "value": "server=mysqlservice;port=3306;user=aksuser;password=password123;database=mydb;CharSet=utf8"
+    },
+    "Cassandrakeysecret_Value": {
+      "value": "server=cassabdraservice;port=9160;user=aksuser;password=password123;keyspace=azuredata"
+    },
+    "staticSites_name": {
+      "value": "projectbosewebapp"
+    }
+  }
+}

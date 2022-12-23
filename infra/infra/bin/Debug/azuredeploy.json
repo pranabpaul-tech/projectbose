@@ -1,0 +1,378 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.5",
+  "parameters": {
+    "subscription_id": {
+      "type": "String"
+    },
+    "vault_name": {
+      "type": "String"
+    },
+    "virtualNetwork_name": {
+      "type": "String"
+    },
+    "subnet_name": {
+      "type": "String"
+    },
+    "deployment_location": {
+      "type": "String",
+      "defaultValue": "westeurope"
+    },
+    "cluster_deployment_location": {
+      "type": "String",
+      "defaultValue": "West Europe"
+    },
+    "addressPrefixes_vnet": {
+      "type": "String"
+    },
+    "addressPrefixes_subnet": {
+      "type": "String"
+    },
+    "registries_name": {
+      "type": "String"
+    },
+    "registries_sku": {
+      "type": "String"
+    },
+    "managedCluster_name": {
+      "type": "String"
+    },
+    "keysecret_Value": {
+      "type": "String"
+    },
+    "staticSites_name": {
+      "type": "String"
+    },
+    "adminPassword": {
+      "defaultValue": "azureuser@12345",
+      "type": "secureString"
+    },
+    "adminUsername": {
+      "defaultValue": "azureuser",
+      "type": "secureString"
+    }
+  },
+  "variables": {
+    "acrPullRole": "[concat(subscription().Id, '/providers/Microsoft.Authorization/roleDefinitions/7f951dda-4ed3-4680-a7ca-43fe172d538d')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2022-01-01",
+      "name": "[parameters('virtualNetwork_name')]",
+      "location": "[parameters('deployment_location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('addressPrefixes_vnet')]"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": []
+        },
+        "subnets": [
+          {
+            "name": "[parameters('subnet_name')]",
+            "properties": {
+              "addressPrefix": "[parameters('addressPrefixes_subnet')]",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2022-01-01",
+      "name": "[concat(parameters('virtualNetwork_name'), '/' , parameters('subnet_name'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetwork_name'))]"
+      ],
+      "properties": {
+        "addressPrefix": "[parameters('addressPrefixes_subnet')]",
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Enabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2022-02-01-preview",
+      "name": "[parameters('registries_name')]",
+      "location": "[parameters('deployment_location')]",
+      "sku": {
+        "name": "[parameters('registries_sku')]",
+        "tier": "[parameters('registries_sku')]"
+      },
+      "properties": {
+        "adminUserEnabled": true,
+        "policies": {
+          "quarantinePolicy": {
+            "status": "disabled"
+          },
+          "trustPolicy": {
+            "type": "Notary",
+            "status": "disabled"
+          },
+          "retentionPolicy": {
+            "days": 7,
+            "status": "disabled"
+          }
+        },
+        "encryption": {
+          "status": "disabled"
+        },
+        "dataEndpointEnabled": false,
+        "publicNetworkAccess": "Enabled",
+        "networkRuleBypassOptions": "AzureServices",
+        "zoneRedundancy": "Disabled",
+        "anonymousPullEnabled": false
+      },
+      "resources": [
+        {
+          "name": "[concat('Microsoft.Authorization/', guid(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), variables('acrPullRole')))]",
+          "type": "providers/roleAssignments",
+          "apiVersion": "2022-04-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.ContainerRegistry/registries', parameters('registries_name'))]",
+            "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name'))]"
+          ],
+          "properties": {
+            "roleDefinitionId": "[variables('acrPullRole')]",
+            "principalId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), '2022-07-01').identityProfile.kubeletidentity.objectId]",
+            "principalType": "ServicePrincipal"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.ContainerService/managedClusters",
+      "apiVersion": "2022-07-01",
+      "name": "[parameters('managedCluster_name')]",
+      "location": "[parameters('cluster_deployment_location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('subnet_name'))]"
+      ],
+      "sku": {
+        "name": "Basic",
+        "tier": "Free"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "kubernetesVersion": "1.24.6",
+        "dnsPrefix": "[concat(parameters('managedCluster_name'), '-', resourceGroup().name, 'group-118ae9')]",
+        "agentPoolProfiles": [
+          {
+            "name": "nodepool1",
+            "count": 3,
+            "vmSize": "Standard_DS2_v2",
+            "osDiskSizeGB": 128,
+            "osDiskType": "Managed",
+            "kubeletDiskType": "OS",
+            "vnetSubnetID": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('subnet_name'))]",
+            "maxPods": 30,
+            "type": "VirtualMachineScaleSets",
+            "availabilityZones": [
+              "1",
+              "2",
+              "3"
+            ],
+            "orchestratorVersion": "1.24.6",
+            "enableNodePublicIP": false,
+            "nodeLabels": {},
+            "mode": "System",
+            "enableEncryptionAtHost": false,
+            "osType": "Linux",
+            "osSKU": "Ubuntu",
+            "enableFIPS": false
+          }
+        ],
+        "linuxProfile": {
+          "adminUsername": [ "parameters('adminUsername')" ],
+          "ssh": {
+            "publicKeys": [
+              {
+                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtFEZOCoPB72lUVw3ZYNEBceK7g4fdD5+hWo8aQAAl+c8Z1/uWFdZjM1aW1lnwsIKwWO6vL+eMs/3qtmPD4fIvCrwhBfniCdHuCt0OeikS6segz/6/tLS9KniN8rVmj2+KIYzbqwFjyAzaxi/fbHu1i9azKiWExH+3WAgSTDbbqsYAmIFsh1KqH17RFfiyykw7Q3uHUdAMJhBOQWwbtzYDN3pAoSkFzqxASSk0wCCETNq8hwpkppc1zlyILcmeUUB7NVSbfgK1hvTHZ8qwOFCH8yWTd8qDiP/Yo5wxWNb/jSP0GvvKJ8HA5Rr10sr1hqS9NdE2eY4WGmMXE/qjgdCz"
+              }
+            ]
+          }
+        },
+        "windowsProfile": {
+          "adminUsername": [ "parameters('adminUsername')" ],
+          "adminPassword": [ "parameters('adminPassword')" ],
+          "enableCSIProxy": true
+        },
+        "servicePrincipalProfile": {
+          "clientId": "msi"
+        },
+        "addonProfiles": {
+        },
+        "nodeResourceGroup": "[concat('MC_', resourceGroup().name, '_', parameters('managedCluster_name'), '_', parameters('deployment_location'))]",
+        "enableRBAC": true,
+        "networkProfile": {
+          "networkPlugin": "azure",
+          "loadBalancerSku": "Standard",
+          "loadBalancerProfile": {
+            "managedOutboundIPs": {
+              "count": 1
+            }
+          },
+          "serviceCidr": "10.1.0.0/24",
+          "dnsServiceIP": "10.1.0.10",
+          "dockerBridgeCidr": "172.17.0.1/24",
+          "outboundType": "loadBalancer"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "apiVersion": "2022-07-01",
+      "name": "[concat(parameters('vault_name'), '/mysqlpass')]",
+      "location": "westeurope",
+      "dependsOn": [
+        "[resourceId('Microsoft.KeyVault/vaults', parameters('vault_name'))]"
+      ],
+      "tags": {
+        "file-encoding": "utf-8"
+      },
+      "properties": {
+        "attributes": {
+          "enabled": true
+        },
+        "value": "[parameters('keysecret_Value')]"
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults",
+      "apiVersion": "2022-07-01",
+      "name": "[parameters('vault_name')]",
+      "location": "[parameters('deployment_location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name'))]"
+      ],
+      "properties": {
+        "sku": {
+          "family": "A",
+          "name": "standard"
+        },
+        "tenantId": "[subscription().tenantid]",
+        "accessPolicies": [
+          {
+            "tenantId": "[subscription().tenantid]",
+            "objectId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), '2022-07-01').identityProfile.kubeletidentity.objectId]",
+            "permissions": {
+              "keys": [
+                "get",
+                "create",
+                "delete",
+                "list",
+                "update",
+                "import",
+                "backup",
+                "restore",
+                "recover"
+              ],
+              "secrets": [
+                "get",
+                "list",
+                "set",
+                "delete",
+                "backup",
+                "restore",
+                "recover"
+              ],
+              "certificates": [
+                "get",
+                "list",
+                "delete",
+                "create",
+                "import",
+                "update",
+                "managecontacts",
+                "getissuers",
+                "listissuers",
+                "setissuers",
+                "deleteissuers",
+                "manageissuers",
+                "recover"
+              ],
+              "storage": [
+                "get",
+                "list",
+                "delete",
+                "set",
+                "update",
+                "regeneratekey",
+                "setsas",
+                "listsas",
+                "getsas",
+                "deletesas"
+              ]
+            }
+          }
+        ],
+        "enabledForDeployment": false,
+        "enableSoftDelete": true,
+        "softDeleteRetentionInDays": 90,
+        "vaultUri": "[concat('https://', parameters('vault_name'), '.vault.azure.net/')]",
+        "provisioningState": "Succeeded"
+      }
+    },
+    {
+      "type": "Microsoft.ContainerService/managedClusters/agentPools",
+      "apiVersion": "2022-07-01",
+      "name": "[concat(parameters('managedCluster_name'), '/nodepool1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('subnet_name'))]"
+      ],
+      "properties": {
+        "count": 3,
+        "vmSize": "Standard_DS2_v2",
+        "osDiskSizeGB": 128,
+        "osDiskType": "Managed",
+        "kubeletDiskType": "OS",
+        "vnetSubnetID": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('subnet_name'))]",
+        "maxPods": 30,
+        "type": "VirtualMachineScaleSets",
+        "availabilityZones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "orchestratorVersion": "1.24.6",
+        "enableNodePublicIP": false,
+        "nodeLabels": {},
+        "mode": "System",
+        "enableEncryptionAtHost": false,
+        "osType": "Linux",
+        "osSKU": "Ubuntu",
+        "enableFIPS": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/staticSites",
+      "apiVersion": "2022-03-01",
+      "name": "[parameters('staticSites_name')]",
+      "location": "[parameters('cluster_deployment_location')]",
+      "sku": {
+        "name": "Standard",
+        "tier": "Standard"
+      },
+      "properties": {
+        "repositoryUrl": "https://github.com/pranabpaul-tech/projectbose",
+        "branch": "apps",
+        "stagingEnvironmentPolicy": "Enabled",
+        "allowConfigFileUpdates": true,
+        "provider": "GitHub",
+        "enterpriseGradeCdnStatus": "Disabled"
+      }
+    }
+  ]
+}
