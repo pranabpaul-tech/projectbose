@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: projectboseacr.azurecr.io
+        username: ${{ secrets.acr_projectboseacr_username }}
+        password: ${{ secrets.acr_projectboseacr_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/api/API/LevelAPI" -f  "api/API/LevelAPI/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }} --label dockerfile-path=api/API/LevelAPI/Dockerfile
+        docker push projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_projectboseaks_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep staging | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace staging`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: staging
+        container-registry-url: projectboseacr.azurecr.io
+        container-registry-username: ${{ secrets.acr_projectboseacr_username }}
+        container-registry-password: ${{ secrets.acr_projectboseacr_password }}
+        secret-name: projectboseadockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: staging
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}
+        imagepullsecrets: |
+          projectboseadockerauth
