@@ -19,7 +19,6 @@ spec:
         image: projectboseacr.azurecr.io/projectboseaks
         env:
         - name: MYSQL_ROOT_PASSWORD
-          # value: password
           valueFrom:
             secretKeyRef:
               name: mysqlsecret
