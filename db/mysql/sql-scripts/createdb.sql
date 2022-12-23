@@ -20,7 +20,7 @@ create table resourcedetail(
    resourcegroupname VARCHAR(200) NOT NULL,
    subscriptionid VARCHAR(50) NOT NULL,
    projectowneremail VARCHAR(100) NOT NULL,
-   levelid INT NOT NULL,
+   leveldetailid INT NOT NULL,
    PRIMARY KEY ( resourcedetailid )
 );
 
