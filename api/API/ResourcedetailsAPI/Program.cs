@@ -19,7 +19,10 @@ internal class Program
         {
             configuration.AddAzureKeyVault(
                 new Uri($"https://{configuration["KeyVaultName"]}.vault.azure.net/"),
-                new DefaultAzureCredential());
+                new DefaultAzureCredential(new DefaultAzureCredentialOptions
+                {
+                    ManagedIdentityClientId = builder.Configuration["AzureADManagedIdentityClientId"]
+                }));
             builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("ConnectionStrings:MySQLRemoteConection")));
         }
         else
