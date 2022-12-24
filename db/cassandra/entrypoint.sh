@@ -7,7 +7,7 @@
 ##
 ## It is compatible with any cassandra:* image
 ##
-
+##
 ## Create script that executes files found in docker-entrypoint-initdb.d/
 
 cat <<'EOF' >> /run-init-scripts.sh
