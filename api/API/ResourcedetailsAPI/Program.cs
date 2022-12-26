@@ -25,7 +25,7 @@ internal class Program
             //    ManagedIdentityClientId = builder.Configuration["AzureADManagedIdentityClientId"]
             //})
             //);
-            builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("ConnectionStrings:MySQLRemoteConection")));
+            builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLRemoteConection")));
         }
         else
             builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLLocalConnection")));
