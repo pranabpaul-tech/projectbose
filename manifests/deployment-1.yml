@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "projectboseaks-88ec"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "projectboseaks-88ec"
+  template:
+    metadata:
+      labels:
+        app: "projectboseaks-88ec"
+    spec:
+      containers:
+        - name: "projectboseaks-88ec"
+          image: "projectboseacr.azurecr.io/projectboseaks"
+          ports:
+          - containerPort: 80
