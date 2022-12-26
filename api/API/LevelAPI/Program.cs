@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Azure.Identity;
 using static Org.BouncyCastle.Math.EC.ECCurve;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 
 internal class Program
 {
@@ -20,15 +22,25 @@ internal class Program
         builder.Services.AddSwaggerGen();
         if (builder.Environment.IsProduction())
         {
-            configuration.AddAzureKeyVault(
-                new Uri($"https://{configuration["KeyVaultName"]}.vault.azure.net/"),
-                 new DefaultAzureCredential());
-                //new DefaultAzureCredential(new DefaultAzureCredentialOptions
-                //{
-                //    ManagedIdentityClientId = builder.Configuration["AzureADManagedIdentityClientId"]
-                //})
-                //);
-            builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLRemoteConection")));
+            var keyVault = $"https://{configuration["KeyVaultName"]}.vault.azure.net/";
+            var keyVaultClient = new KeyVaultClient(async (authority, resource, scope) =>
+            {
+                var credential = new DefaultAzureCredential(false);
+                var token = credential.GetToken(
+                   new Azure.Core.TokenRequestContext(
+                       new[] { "https://vault.azure.net/.default" }));
+                return token.Token;
+            });
+            configuration.AddAzureKeyVault(keyVault, keyVaultClient, new DefaultKeyVaultSecretManager());
+            //configuration.AddAzureKeyVault(
+            //    new Uri($"https://{configuration["KeyVaultName"]}.vault.azure.net/"),
+            //    new DefaultAzureCredential());
+            //new DefaultAzureCredential(new DefaultAzureCredentialOptions
+            //{
+            //    ManagedIdentityClientId = builder.Configuration["AzureADManagedIdentityClientId"]
+            //})
+            //);
+            builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("ConnectionStrings:MySQLRemoteConection")));
         }
         else
             builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLLocalConnection")));
