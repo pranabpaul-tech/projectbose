@@ -6,6 +6,7 @@ metadata:
         app: "resourcedetailsdeploy"
 spec:
     type: LoadBalancer
+    loadBalancerIP: 20.103.72.246
     ports:
     - port: 80
       targetPort: 80
