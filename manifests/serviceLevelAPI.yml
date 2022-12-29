@@ -9,7 +9,7 @@ spec:
     #type: LoadBalancer
     #loadBalancerIP: 20.93.241.92
     ports:
-    - port: 80
+    - port: 8080
       targetPort: 80
       protocol: TCP
       name: http
