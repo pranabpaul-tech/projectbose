@@ -5,8 +5,8 @@ metadata:
     labels:
         app: "leveldetailsdeploy"
 spec:
-    type: LoadBalancer
-    loadBalancerIP: 20.82.85.37
+    #type: LoadBalancer
+    #loadBalancerIP: 20.82.85.37
     ports:
     - port: 80
       targetPort: 80
