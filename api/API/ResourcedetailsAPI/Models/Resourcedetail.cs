@@ -11,6 +11,6 @@ namespace ResourcedetailsAPI.Models
         public string Resourcegroupname { get; set; }
         public string Subscriptionid { get; set; }
         public string Projectowneremail { get; set; }
-        public int Levelid { get; set; }
+        public int Leveldetailid { get; set; }
     }
 }
