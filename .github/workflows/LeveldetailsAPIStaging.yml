@@ -4,16 +4,9 @@ env:
   NAMESPACE: staging
 
 jobs:
-  test-connection:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    
-    - uses: azure/docker-login@v1
-      with:
-        login-server: projectboseacr.azurecr.io
-        username: ${{ secrets.acr_projectboseacr_username }}
-        password: ${{ secrets.acr_projectboseacr_password }}
+  LevelAPIStaging:
+    uses: ./.github/workflows/LevelAPIStaging.yml
+
   build-and-deploy:
     needs: [LevelAPIStaging]
     runs-on: ubuntu-latest
