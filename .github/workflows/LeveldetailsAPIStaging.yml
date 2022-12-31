@@ -1,9 +1,11 @@
-on: [push]
+name: LeveldetailsAPIStaging
+on: [workflow_call]
 env: 
   NAMESPACE: staging
 
 jobs:
   build-and-deploy:
+    needs: [LevelAPIStaging]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -14,7 +16,7 @@ jobs:
         username: ${{ secrets.acr_projectboseacr_username }}
         password: ${{ secrets.acr_projectboseacr_password }}
     
-    - name: Build and push image to ACR
+    - name: Build and push image to ACR        
       id: build-image
       run: |
         docker build "$GITHUB_WORKSPACE/api/API/LeveldetailsAPI" -f  "api/API/LeveldetailsAPI/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }} --label dockerfile-path=api/API/LeveldetailsAPI/Dockerfile

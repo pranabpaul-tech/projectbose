@@ -1,9 +1,11 @@
+name: ResourcedetailsAPIStaging
 on: [push]
 env: 
   NAMESPACE: staging
 
 jobs:
   build-and-deploy:
+    needs: [LeveldetailsAPIStaging]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
