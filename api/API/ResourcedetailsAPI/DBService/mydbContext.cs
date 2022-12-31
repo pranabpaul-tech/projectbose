@@ -37,7 +37,7 @@ namespace ResourcedetailsAPI.DBService
 
                 entity.Property(e => e.Resourcedetailid).HasColumnName("resourcedetailid");
 
-                entity.Property(e => e.Levelid).HasColumnName("levelid");
+                entity.Property(e => e.Leveldetailid).HasColumnName("leveldetailid");
 
                 entity.Property(e => e.Projectname)
                     .IsRequired()
