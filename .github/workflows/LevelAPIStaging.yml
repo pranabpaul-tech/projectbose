@@ -1,5 +1,5 @@
 name: LevelAPIStaging
-on: [workflow_call]
+on: [push]
 env: 
   NAMESPACE: staging
 
