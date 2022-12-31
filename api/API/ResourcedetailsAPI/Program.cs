@@ -40,7 +40,6 @@ internal class Program
             //})
             //);
             //builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("ConnectionStrings:MySQLRemoteConection")));
-            //
             builder.Services.AddDbContext<mydbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLRemoteConection")));
         }
         else
