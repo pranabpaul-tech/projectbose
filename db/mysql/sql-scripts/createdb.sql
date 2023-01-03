@@ -11,6 +11,7 @@ create table leveldetail(
    leveldetailid INT NOT NULL AUTO_INCREMENT,
    leveldetailname VARCHAR(100) NOT NULL,
    levelid INT NOT NULL,
+   superleveldetailid INT NOT NULL,
    PRIMARY KEY ( leveldetailid )
 );
 
