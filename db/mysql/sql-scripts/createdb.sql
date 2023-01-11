@@ -4,7 +4,9 @@ create table level(
    levelid INT NOT NULL AUTO_INCREMENT,
    levelname VARCHAR(100) NOT NULL,
    superlevelid INT NOT NULL,
-   PRIMARY KEY ( levelid )
+   PRIMARY KEY ( levelid ),
+   FOREIGN KEY (superlevelid) REFERENCES level (levelid) 
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table leveldetail(
@@ -12,7 +14,10 @@ create table leveldetail(
    leveldetailname VARCHAR(100) NOT NULL,
    levelid INT NOT NULL,
    superleveldetailid INT NOT NULL,
-   PRIMARY KEY ( leveldetailid )
+   squenceid INT NOT NULL,
+   PRIMARY KEY ( leveldetailid ),
+   FOREIGN KEY (superleveldetailid) REFERENCES level (leveldetailid) 
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table resourcedetail(
@@ -24,6 +29,21 @@ create table resourcedetail(
    leveldetailid INT NOT NULL,
    PRIMARY KEY ( resourcedetailid )
 );
+
+-- CREATE PROCEDURE leveldetailpath_sp 
+-- BEGIN
+-- WITH RECURSIVE leveldetail_path (leveldetailid, leveldetailname, levelid, path) AS
+-- (
+--   SELECT leveldetailid, leveldetailname, levelid, leveldetailname as path
+--     FROM leveldetail
+--     WHERE superleveldetailid = 0
+--   UNION ALL
+--   SELECT c.leveldetailid, c.leveldetailname, c.levelid, CONCAT(cp.path, ' > ', c.leveldetailname)
+--     FROM leveldetail_path AS cp JOIN leveldetail AS c
+--       ON cp.leveldetailid = c.superleveldetailid
+-- )
+-- select leveldetailid, leveldetailname, path from leveldetail_path where levelid = (select MAX(levelid) from level) ;
+-- END;
 
 CREATE USER 'aksuser'@'10.0.0.%' IDENTIFIED BY 'password123';
 GRANT ALL PRIVILEGES ON mydb.* TO 'aksuser'@'10.0.0.%';
