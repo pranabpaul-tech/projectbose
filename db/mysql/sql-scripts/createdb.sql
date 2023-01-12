@@ -1,12 +1,11 @@
 use mydb;
 
+DROP TABLE IF EXISTS level, leveldetail, resourcedetail;
 create table level(
    levelid INT NOT NULL AUTO_INCREMENT,
    levelname VARCHAR(100) NOT NULL,
    superlevelid INT NOT NULL,
-   PRIMARY KEY ( levelid ),
-   FOREIGN KEY (superlevelid) REFERENCES level (levelid) 
-    ON DELETE CASCADE ON UPDATE CASCADE
+   PRIMARY KEY ( levelid )
 );
 
 create table leveldetail(
@@ -15,9 +14,7 @@ create table leveldetail(
    levelid INT NOT NULL,
    superleveldetailid INT NOT NULL,
    squenceid INT NOT NULL,
-   PRIMARY KEY ( leveldetailid ),
-   FOREIGN KEY (superleveldetailid) REFERENCES level (leveldetailid) 
-    ON DELETE CASCADE ON UPDATE CASCADE
+   PRIMARY KEY ( leveldetailid )
 );
 
 create table resourcedetail(

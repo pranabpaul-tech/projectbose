@@ -13,6 +13,7 @@
 cat <<'EOF' >> /run-init-scripts.sh
 #!/usr/bin/env bash
 
+
 LOCK=/var/lib/cassandra/_init.done
 INIT_DIR=docker-entrypoint-initdb.d
 
