@@ -101,5 +101,6 @@ END$$
 DELIMITER ;
 
 
+
 CREATE USER 'aksuser'@'10.0.0.%' IDENTIFIED BY 'password123';
 GRANT ALL PRIVILEGES ON mydb.* TO 'aksuser'@'10.0.0.%';
