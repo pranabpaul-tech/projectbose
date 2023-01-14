@@ -1,6 +1,7 @@
 use mydb;
 
 DROP TABLE IF EXISTS level, leveldetail, resourcedetail, levelinfo;
+
 create table level(
    levelid INT NOT NULL AUTO_INCREMENT,
    levelname VARCHAR(100) NOT NULL,
