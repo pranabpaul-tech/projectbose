@@ -101,7 +101,16 @@ END$$
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS GetResourceLevelInfo$$
+CREATE PROCEDURE GetResourceLevelInfo()
+BEGIN
+	SET @sql = 'select r.resourcedetailid, r.projectname, r.resourcegroupname, r.subscriptionid, r.projectowneremail, l.* from resourcedetail r join levelinfo l on r.leveldetailid=l.leveldetailid';
+      PREPARE stmt FROM @sql;
+      EXECUTE stmt;
+      DEALLOCATE PREPARE stmt;
+END$$
 
+DELIMITER ;
 
 CREATE USER 'aksuser'@'10.0.0.%' IDENTIFIED BY 'password123';
 GRANT ALL PRIVILEGES ON mydb.* TO 'aksuser'@'10.0.0.%';
