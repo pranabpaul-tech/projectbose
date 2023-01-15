@@ -101,6 +101,8 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+
 DROP PROCEDURE IF EXISTS GetResourceLevelInfo$$
 CREATE PROCEDURE GetResourceLevelInfo()
 BEGIN
