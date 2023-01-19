@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["PrepareDataAPI/PrepareDataAPI.csproj", "PrepareDataAPI/"]
+COPY ["PrepareDataAPI.csproj", "PrepareDataAPI/"]
 RUN dotnet restore "PrepareDataAPI/PrepareDataAPI.csproj"
-COPY . .
+COPY . "/src/PrepareDataAPI"
 WORKDIR "/src/PrepareDataAPI"
 RUN dotnet build "PrepareDataAPI.csproj" -c Release -o /app/build
 
