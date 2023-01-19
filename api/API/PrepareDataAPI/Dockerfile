@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["PrepareData/PrepareData.csproj", "PrepareData/"]
-RUN dotnet restore "PrepareData/PrepareData.csproj"
+COPY ["PrepareDataAPI/PrepareDataAPI.csproj", "PrepareDataAPI/"]
+RUN dotnet restore "PrepareDataAPI/PrepareDataAPI.csproj"
 COPY . .
-WORKDIR "/src/PrepareData"
-RUN dotnet build "PrepareData.csproj" -c Release -o /app/build
+WORKDIR "/src/PrepareDataAPI"
+RUN dotnet build "PrepareDataAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "PrepareData.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "PrepareDataAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "PrepareData.dll"]
+ENTRYPOINT ["dotnet", "PrepareDataAPI.dll"]
