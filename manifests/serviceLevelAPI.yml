@@ -6,7 +6,8 @@ metadata:
         app: "leveldeploy"
 
 spec:
-    type: LoadBalancer
+    #type: LoadBalancer
+    #loadBalancerIP: 20.93.241.92
     ports:
     - port: 80
       targetPort: 80
