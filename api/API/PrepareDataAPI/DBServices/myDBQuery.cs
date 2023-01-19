@@ -33,7 +33,7 @@ namespace PrepareDataAPI.DBService
                     {
                         Levelid = reader.GetInt32("levelid"),
                         Levelname = reader.GetString("levelname"),
-                        Superlevelid= reader.GetInt32("superlevelid")
+                        Superlevelid = reader.GetInt32("superlevelid")
                     };
                     levels.Add(level);
                 }
@@ -50,7 +50,7 @@ namespace PrepareDataAPI.DBService
             {
                 cmdLevel.CommandText = @"select * from level";
                 cmdLevel.Transaction = txnLevel;
-                var resultLevel = await ReadAllAsync(await cmdLevel.ExecuteReaderAsync());         
+                var resultLevel = await ReadAllAsync(await cmdLevel.ExecuteReaderAsync());
                 foreach (var item in resultLevel)
                 {
                     levelList += item.Levelname + ',';
@@ -62,7 +62,7 @@ namespace PrepareDataAPI.DBService
             using var txnProc = await _context.Connection.BeginTransactionAsync();
             using var cmdProc = _context.Connection.CreateCommand();
             {
-                cmdProc.CommandText = @"call CreateLevelInfo('" + levelList+ "')";
+                cmdProc.CommandText = @"call CreateLevelInfo('" + levelList + "')";
                 cmdProc.Transaction = txnProc;
                 await cmdProc.ExecuteNonQueryAsync();
             }
@@ -79,7 +79,7 @@ namespace PrepareDataAPI.DBService
             cmdLevelInfo.CommandText = @"call GetResourceLevelInfo()";
             cmdLevelInfo.Transaction = txnLevelInfo;
             var readerLevelInfo = await cmdLevelInfo.ExecuteReaderAsync();
- 
+
             while (await readerLevelInfo.ReadAsync())
             {
                 resultData.Add(GetDynamicData(readerLevelInfo));
@@ -150,7 +150,7 @@ namespace PrepareDataAPI.DBService
         /// <returns></returns>
         private dynamic GetCassandraData(Row reader)
         {
-            string[] colName = {"resourceid", "bu", "cost", "costcenter", "division", "project", "projectowner", "region", "resourcegroupname", "resourcename", "resourcetype", "subscriptionid", "usagedate"};
+            string[] colName = { "resourceid", "bu", "cost", "costcenter", "division", "project", "projectowner", "region", "resourcegroupname", "resourcename", "resourcetype", "subscriptionid", "usagedate" };
             var expandoObject = new ExpandoObject() as IDictionary<string, object>;
             for (int i = 0; i < reader.Length; i++)
             {

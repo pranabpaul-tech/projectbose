@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeveldetailsAPI", "Leveldet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourcedetailsAPI", "ResourcedetailsAPI\ResourcedetailsAPI.csproj", "{5218524E-6952-432E-8CD3-66E9AAC296F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrepareDataAPI", "PrepareDataAPI\PrepareDataAPI.csproj", "{031CE28F-31EE-4C74-9B86-E7A83F91BB45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareDataAPI", "PrepareDataAPI\PrepareDataAPI.csproj", "{EB45B6EC-98AD-4854-A4CA-345B3D7DCA7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{5218524E-6952-432E-8CD3-66E9AAC296F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5218524E-6952-432E-8CD3-66E9AAC296F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5218524E-6952-432E-8CD3-66E9AAC296F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{031CE28F-31EE-4C74-9B86-E7A83F91BB45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{031CE28F-31EE-4C74-9B86-E7A83F91BB45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{031CE28F-31EE-4C74-9B86-E7A83F91BB45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{031CE28F-31EE-4C74-9B86-E7A83F91BB45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB45B6EC-98AD-4854-A4CA-345B3D7DCA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB45B6EC-98AD-4854-A4CA-345B3D7DCA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB45B6EC-98AD-4854-A4CA-345B3D7DCA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB45B6EC-98AD-4854-A4CA-345B3D7DCA7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

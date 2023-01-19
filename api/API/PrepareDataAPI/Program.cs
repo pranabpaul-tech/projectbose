@@ -38,7 +38,7 @@ if (builder.Environment.IsProduction())
 }
 else
     builder.Services.AddTransient<myDBConnect>(_ => new myDBConnect(configuration.GetConnectionString("MySQLLocalConnection")));
-    builder.Services.AddTransient<cassandraDBConnect>(_ => new cassandraDBConnect(configuration.GetConnectionString("LocalCassandra"), configuration.GetConnectionString("CassandraUser"), configuration.GetConnectionString("CassandraPass")));
+builder.Services.AddTransient<cassandraDBConnect>(_ => new cassandraDBConnect(configuration.GetConnectionString("LocalCassandra"), configuration.GetConnectionString("CassandraUser"), configuration.GetConnectionString("CassandraPass")));
 
 var app = builder.Build();
 

@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "PrepareDataAPI/1.0.0": {
         "dependencies": {
-          "CassandraCSharpDriver": "3.19.0",
+          "CassandraCSharpDriver": "3.19.1",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.17.0",
           "MySqlConnector": "2.2.5",
           "Swashbuckle.AspNetCore": "6.2.3"
@@ -17,7 +17,7 @@
           "PrepareDataAPI.dll": {}
         }
       },
-      "CassandraCSharpDriver/3.19.0": {
+      "CassandraCSharpDriver/3.19.1": {
         "dependencies": {
           "K4os.Compression.LZ4": "1.1.11",
           "Microsoft.Extensions.Logging": "1.0.0",
@@ -30,7 +30,7 @@
         "runtime": {
           "lib/netstandard2.0/Cassandra.dll": {
             "assemblyVersion": "3.99.0.0",
-            "fileVersion": "3.19.0.0"
+            "fileVersion": "3.19.1.0"
           }
         }
       },
@@ -586,12 +586,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CassandraCSharpDriver/3.19.0": {
+    "CassandraCSharpDriver/3.19.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-u0acscvxEg5O2GgnYMhJ2Pewa9R/xDZwNsKCGMw0Q8qcR/3jvPV6xGQJB3Ndm3PkvVWeDKqy4q4r76sWtTDvkw==",
-      "path": "cassandracsharpdriver/3.19.0",
-      "hashPath": "cassandracsharpdriver.3.19.0.nupkg.sha512"
+      "sha512": "sha512-yB1jCDZngMqlcQq0+8iTmH6K1qawaS3gYg4xPOHq409cKyacFU+9iU6dKfA+UrQbWhBuaK+oEYz9ppz70kcjvw==",
+      "path": "cassandracsharpdriver/3.19.1",
+      "hashPath": "cassandracsharpdriver.3.19.1.nupkg.sha512"
     },
     "K4os.Compression.LZ4/1.1.11": {
       "type": "package",

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "uFvx/fUKL4g6x14gB0FvYoFJwNPozr5EgCRO3b+Z7pQqJo81aP2I2zwfbOI+ymdI7jdB5V6fUz81gw3h+pu17w==",
+  "dgSpecHash": "afbAs/k7FfGCSmZtnPOqxZNSB3LyUGvyUiPzCAQmHlNQ4DpHAYC/PjVIt5ResbQdhbccP1igybpa9xjsk/sYog==",
   "success": true,
   "projectFilePath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\PrepareDataAPI\\PrepareDataAPI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\pranabp\\.nuget\\packages\\cassandracsharpdriver\\3.19.0\\cassandracsharpdriver.3.19.0.nupkg.sha512",
+    "C:\\Users\\pranabp\\.nuget\\packages\\cassandracsharpdriver\\3.19.1\\cassandracsharpdriver.3.19.1.nupkg.sha512",
     "C:\\Users\\pranabp\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\pranabp\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\pranabp\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

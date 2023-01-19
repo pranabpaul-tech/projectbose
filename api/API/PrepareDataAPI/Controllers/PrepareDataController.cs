@@ -17,7 +17,7 @@ namespace PrepareDataAPI.Controllers
             _cassandraContext = cassandraContext;
         }
 
-        // GET: api/PrepareDataAPI
+        // GET: api/Preparedata
         [HttpGet]
         public async Task<ActionResult<List<dynamic>>> GetResourceLevel()
         {
@@ -25,7 +25,7 @@ namespace PrepareDataAPI.Controllers
             return new ActionResult<List<dynamic>>(await query.GetResourceLevelInfoAsync());
         }
 
-        // POST: api/PrepareDataAPI
+        // POST: api/Preparedata
         // should called once to create levelinfo table
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -35,7 +35,7 @@ namespace PrepareDataAPI.Controllers
             await query.CreateLevelInfoAsync();
         }
 
-        // PUT: api/PrepareDataAPI
+        // PUT: api/Preparedata
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
         public async Task CreateAzureCost()
@@ -44,7 +44,7 @@ namespace PrepareDataAPI.Controllers
             await query.CreateAzureCostAsync();
         }
 
-        // GET: api/PrepareDataAPI/azurecost
+        // GET: api/Preparedata/azurecost
         // to protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpGet("{dataname}")]
         public async Task<ActionResult<List<dynamic>>> GetAzureCost()

@@ -1,5 +1,6 @@
 ﻿using Cassandra;
 using Cassandra.DataStax.Auth;
+using System.Diagnostics.Metrics;
 
 namespace PrepareDataAPI.DBService
 {

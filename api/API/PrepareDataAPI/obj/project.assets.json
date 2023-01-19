@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "CassandraCSharpDriver/3.19.0": {
+      "CassandraCSharpDriver/3.19.1": {
         "type": "package",
         "dependencies": {
           "K4os.Compression.LZ4": "1.1.11",
@@ -1061,15 +1061,15 @@
     }
   },
   "libraries": {
-    "CassandraCSharpDriver/3.19.0": {
-      "sha512": "u0acscvxEg5O2GgnYMhJ2Pewa9R/xDZwNsKCGMw0Q8qcR/3jvPV6xGQJB3Ndm3PkvVWeDKqy4q4r76sWtTDvkw==",
+    "CassandraCSharpDriver/3.19.1": {
+      "sha512": "yB1jCDZngMqlcQq0+8iTmH6K1qawaS3gYg4xPOHq409cKyacFU+9iU6dKfA+UrQbWhBuaK+oEYz9ppz70kcjvw==",
       "type": "package",
-      "path": "cassandracsharpdriver/3.19.0",
+      "path": "cassandracsharpdriver/3.19.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
-        "cassandracsharpdriver.3.19.0.nupkg.sha512",
+        "cassandracsharpdriver.3.19.1.nupkg.sha512",
         "cassandracsharpdriver.nuspec",
         "lib/net452/Cassandra.dll",
         "lib/net452/Cassandra.xml",
@@ -3992,7 +3992,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "CassandraCSharpDriver >= 3.19.0",
+      "CassandraCSharpDriver >= 3.19.1",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.17.0",
       "MySqlConnector >= 2.2.5",
       "Swashbuckle.AspNetCore >= 6.2.3"
@@ -4045,7 +4045,7 @@
         "dependencies": {
           "CassandraCSharpDriver": {
             "target": "Package",
-            "version": "[3.19.0, )"
+            "version": "[3.19.1, )"
           },
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
             "target": "Package",
