@@ -2,11 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\.github",
-    "\\.github\\workflows",
     "\\api",
     "\\api\\API",
-    "\\manifests"
+    "\\api\\API\\PrepareData",
+    "\\api\\API\\PrepareDataAPI\\bin\\Debug",
+    "\\api\\API\\PrepareData\\obj"
   ],
-  "SelectedNode": "\\.github\\workflows\\LevelAPIStaging.yml",
+  "SelectedNode": "\\api\\API\\API.sln",
   "PreviewInSolutionExplorer": false
 }

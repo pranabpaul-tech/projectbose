@@ -1,0 +1,7 @@
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.csproj.AssemblyReference.cache
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.AssemblyInfoInputs.cache
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.AssemblyInfo.cs
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.csproj.CoreCompileInputs.cache
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\pranabp\source\repos\projectbose\api\API\PrepareData\obj\Debug\net6.0\PrepareDataAPI.MvcApplicationPartsAssemblyInfo.cache
