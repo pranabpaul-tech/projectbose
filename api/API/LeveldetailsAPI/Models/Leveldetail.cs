@@ -10,7 +10,6 @@ namespace LeveldetailsAPI.Models
         public int Leveldetailid { get; set; }
         public string Leveldetailname { get; set; }
         public int Levelid { get; set; }
-        public int Sequenceid { get; set; }
         public int Superleveldetailid { get; set; }
 
     }

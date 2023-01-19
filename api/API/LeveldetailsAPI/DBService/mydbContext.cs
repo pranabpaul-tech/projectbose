@@ -45,8 +45,6 @@ namespace LeveldetailsAPI.DBService
 
                 entity.Property(e => e.Levelid).HasColumnName("levelid");
 
-                entity.Property(e => e.Sequenceid).HasColumnName("squenceid");
-
                 entity.Property(e => e.Superleveldetailid).HasColumnName("superleveldetailid");
             });
 
