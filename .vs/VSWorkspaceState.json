@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\.github",
-    "\\api",
-    "\\api\\API",
-    "\\api\\API\\PrepareData",
-    "\\api\\API\\PrepareDataAPI\\bin\\Debug",
-    "\\api\\API\\PrepareData\\obj"
+    ""
   ],
-  "SelectedNode": "\\api\\API\\API.sln",
+  "SelectedNode": "\\API.sln",
   "PreviewInSolutionExplorer": false
 }

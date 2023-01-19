@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "afbAs/k7FfGCSmZtnPOqxZNSB3LyUGvyUiPzCAQmHlNQ4DpHAYC/PjVIt5ResbQdhbccP1igybpa9xjsk/sYog==",
+  "dgSpecHash": "GNMO7gC3q1IZ8nhIgibAAaAlK6P10yDk5manX/QwhevBl4cp2HWSSJK14NDAHIS/ERePp9St4njfgMcPwa6T4A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\PrepareDataAPI\\PrepareDataAPI.csproj",
+  "projectFilePath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\api\\PrepareDataAPI\\PrepareDataAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pranabp\\.nuget\\packages\\cassandracsharpdriver\\3.19.1\\cassandracsharpdriver.3.19.1.nupkg.sha512",
     "C:\\Users\\pranabp\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
