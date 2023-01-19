@@ -19,6 +19,8 @@ spec:
         ports:
         - containerPort: 9160
           name: cassandraport
+        - containerPort: 9042
+          name: cassandraqueryport
         volumeMounts:
         - name: cassandra-vol
           mountPath: /var/lib/cassandra

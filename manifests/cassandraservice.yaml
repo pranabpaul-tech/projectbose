@@ -11,6 +11,10 @@ spec:
     port: 9160
     protocol: TCP
     targetPort: 9160
+  - name: 9041-9042
+    port: 9042
+    protocol: TCP
+    targetPort: 9042
   selector:
     app: cassandra
   type: ClusterIP
