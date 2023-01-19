@@ -17,8 +17,8 @@ spec:
       - name: cassandra-container
         image: projectboseacr.azurecr.io/projectboseaks
         ports:
-        - containerPort: 9160
-          name: cassandraport
+        # - containerPort: 9160
+        #   name: cassandraport
         - containerPort: 9042
           name: cassandraqueryport
         volumeMounts:

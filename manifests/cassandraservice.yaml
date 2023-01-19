@@ -7,11 +7,11 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - name: 9160-9160
-    port: 9160
-    protocol: TCP
-    targetPort: 9160
-  - name: 9041-9042
+  # - name: 9160-9160
+  #   port: 9160
+  #   protocol: TCP
+  #   targetPort: 9160
+  - name: 9042-9042
     port: 9042
     protocol: TCP
     targetPort: 9042
