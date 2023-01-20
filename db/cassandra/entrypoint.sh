@@ -64,6 +64,7 @@ chmod +x $EP
 # mkdir /mnt/blob
 # mkdir /mnt/blob/input
 # mkdir /mnt/blob/output
+
 chmod 777 /mnt/blob/input
 chmod 777 /mnt/blob/output
 # Call the new entrypoint
