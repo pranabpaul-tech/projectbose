@@ -91,9 +91,13 @@ BEGIN
        SET loopindex = loopindex - 1;
     END IF;
     SET selectofsql = CONCAT(selectofsql,' t',loopindex,'.leveldetailid');
-    SET @finalsql = CONCAT(startofsql,selectofsql,midofsql,joinofsql,endofsql); 
+    SET @finalsql = CONCAT(startofsql,selectofsql,midofsql,joinofsql,endofsql);
+    SET @dropsql = 'drop table if exists levelinfo'; 
    --  SET outputsql = @finalsql;
    --  select @outputsql;
+   PREPARE stmt FROM @dropsql;
+   EXECUTE stmt;
+   DEALLOCATE PREPARE stmt;
    PREPARE stmt FROM @finalsql;
    EXECUTE stmt;
    DEALLOCATE PREPARE stmt;

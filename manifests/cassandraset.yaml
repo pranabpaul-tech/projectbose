@@ -18,7 +18,9 @@ spec:
         image: projectboseacr.azurecr.io/projectboseaks
         ports:
         - containerPort: 9160
-          name: cassandraport
+          name: regularport
+        - containerPort: 9042
+          name: queryport
         volumeMounts:
         - name: cassandra-vol
           mountPath: /var/lib/cassandra
