@@ -17,8 +17,8 @@ namespace PrepareDataAPI.Controllers
             _cassandraContext = cassandraContext;
         }
 
-        // GET: api/Preparedata
-        [HttpGet]
+        // GET: api/Preparedata/resourceLevel
+        [HttpGet("{data}")]
         public async Task<ActionResult<List<dynamic>>> GetResourceLevel()
         {
             var query = new myDBQuery(_context, _cassandraContext);
@@ -44,9 +44,9 @@ namespace PrepareDataAPI.Controllers
             await query.CreateAzureCostAsync();
         }
 
-        // GET: api/Preparedata/azurecost
+        // GET: api/Preparedata
         // to protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpGet("{dataname}")]
+        [HttpGet]
         public async Task<ActionResult<List<dynamic>>> GetAzureCost()
         {
             var query = new myDBQuery(_context, _cassandraContext);
