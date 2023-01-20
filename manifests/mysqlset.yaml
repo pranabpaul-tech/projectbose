@@ -26,11 +26,11 @@ spec:
         - containerPort: 3306
           name: mysqlport
         volumeMounts:
-        - name: mysql-vol
+        - name: mysql-volume
           mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
-      name: mysql-vol
+      name: mysql-volume
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
