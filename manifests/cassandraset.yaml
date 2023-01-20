@@ -28,13 +28,13 @@ spec:
           mountPath: /mnt/blob/input
         - name: blob-output-vol
           mountPath: /mnt/blob/output
-  volumes:
-    - name: blobinputstaging
-      persistentVolumeClaim:
-        claimName: pvc-blob-input-staging
-    - name: bloboutputstaging
-      persistentVolumeClaim:
-        claimName: pvc-blob-output-staging
+      volumes:
+        - name: blobinputstaging
+          persistentVolumeClaim:
+            claimName: pvc-blob-input-staging
+        - name: bloboutputstaging
+          persistentVolumeClaim:
+            claimName: pvc-blob-output-staging
   volumeClaimTemplates:
   - metadata:
       name: cassandra-vol
