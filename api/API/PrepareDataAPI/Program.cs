@@ -37,9 +37,10 @@ if (builder.Environment.IsProduction())
     builder.Services.AddTransient<cassandraDBConnect>(_ => new cassandraDBConnect(configuration.GetConnectionString("RemoteCassandra"), configuration.GetConnectionString("CassandraUser"), configuration.GetConnectionString("CassandraPass")));
 }
 else
+{
     builder.Services.AddTransient<myDBConnect>(_ => new myDBConnect(configuration.GetConnectionString("MySQLLocalConnection")));
-builder.Services.AddTransient<cassandraDBConnect>(_ => new cassandraDBConnect(configuration.GetConnectionString("LocalCassandra"), configuration.GetConnectionString("CassandraUser"), configuration.GetConnectionString("CassandraPass")));
-
+    builder.Services.AddTransient<cassandraDBConnect>(_ => new cassandraDBConnect(configuration.GetConnectionString("LocalCassandra"), configuration.GetConnectionString("CassandraUser"), configuration.GetConnectionString("CassandraPass")));
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

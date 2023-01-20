@@ -73,18 +73,27 @@ namespace PrepareDataAPI.DBService
         public async Task<List<dynamic>> GetResourceLevelInfoAsync()
         {
             List<dynamic> resultData = new List<dynamic>();
-            await _context.Connection.OpenAsync();
-            using var txnLevelInfo = await _context.Connection.BeginTransactionAsync();
-            using var cmdLevelInfo = _context.Connection.CreateCommand();
-            cmdLevelInfo.CommandText = @"call GetResourceLevelInfo()";
-            cmdLevelInfo.Transaction = txnLevelInfo;
-            var readerLevelInfo = await cmdLevelInfo.ExecuteReaderAsync();
-
-            while (await readerLevelInfo.ReadAsync())
+            try
             {
-                resultData.Add(GetDynamicData(readerLevelInfo));
+                await _context.Connection.OpenAsync();
+                using var txnLevelInfo = await _context.Connection.BeginTransactionAsync();
+                using var cmdLevelInfo = _context.Connection.CreateCommand();
+                cmdLevelInfo.CommandText = @"call GetResourceLevelInfo()";
+                cmdLevelInfo.Transaction = txnLevelInfo;
+                var readerLevelInfo = await cmdLevelInfo.ExecuteReaderAsync();
+
+                while (await readerLevelInfo.ReadAsync())
+                {
+                    resultData.Add(GetDynamicData(readerLevelInfo));
+                }
+                await _context.Connection.CloseAsync();
             }
-            await _context.Connection.CloseAsync();
+            catch (Exception ex)
+            {
+                resultData.Add(ex.Source + ": " + ex.Message);
+                //throw;
+            }
+            
             return resultData;
         }
 
@@ -101,6 +110,7 @@ namespace PrepareDataAPI.DBService
         public async Task CreateAzureCostAsync()
         {
             string sql = @"CREATE TABLE azuredata.azurecost(resourceid text PRIMARY KEY, resourcename text, resourcetype text, resourcegroupname text, subscriptionid text, region text, usagedate timestamp, project text, projectowner text, cost decimal";
+            string dropSql = @"drop table if exists azuredata.azurecost";
             await _context.Connection.OpenAsync();
             using var txnLevel = await _context.Connection.BeginTransactionAsync();
             using var cmdLevel = _context.Connection.CreateCommand();
@@ -119,6 +129,8 @@ namespace PrepareDataAPI.DBService
 
             using (var session = _cassandraContext.Connection.Connect())
             {
+                var dropQuery = new SimpleStatement(dropSql);
+                await session.ExecuteAsync(dropQuery);
                 var query = new SimpleStatement(sql);
                 await session.ExecuteAsync(query);
             }
@@ -130,16 +142,25 @@ namespace PrepareDataAPI.DBService
         public async Task<List<dynamic>> SelectAzureCostAsync()
         {
             List<dynamic> resultData = new List<dynamic>();
-            string sql = @"select * from azuredata.azurecost";
-            using (var session = _cassandraContext.Connection.Connect())
+            try
             {
-                var query = new SimpleStatement(sql);
-                var rs = await session.ExecuteAsync(query);
-                foreach (var row in rs)
+                string sql = @"select * from azuredata.azurecost";
+                using (var session = _cassandraContext.Connection.Connect())
                 {
-                    resultData.Add(GetCassandraData(row));
+                    var query = new SimpleStatement(sql);
+                    var rs = await session.ExecuteAsync(query);
+                    foreach (var row in rs)
+                    {
+                        resultData.Add(GetCassandraData(row));
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                resultData.Add(ex.Source + ": " + ex.Message);
+                //throw;
+            }
+            
             return resultData;
         }
 
