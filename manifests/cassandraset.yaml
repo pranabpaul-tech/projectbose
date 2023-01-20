@@ -24,9 +24,9 @@ spec:
         volumeMounts:
         - name: cassandra-vol
           mountPath: /var/lib/cassandra
-        - name: blob-input-vol
+        - name: blobinputstaging
           mountPath: /mnt/blob/input
-        - name: blob-output-vol
+        - name: bloboutputstaging
           mountPath: /mnt/blob/output
       volumes:
         - name: blobinputstaging
