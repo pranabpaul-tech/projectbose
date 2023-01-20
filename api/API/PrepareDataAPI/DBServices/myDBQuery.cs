@@ -101,6 +101,7 @@ namespace PrepareDataAPI.DBService
         public async Task CreateAzureCostAsync()
         {
             string sql = @"CREATE TABLE azuredata.azurecost(resourceid text PRIMARY KEY, resourcename text, resourcetype text, resourcegroupname text, subscriptionid text, region text, usagedate timestamp, project text, projectowner text, cost decimal";
+            string dropSql = @"drop table if exists azuredata.azurecost";
             await _context.Connection.OpenAsync();
             using var txnLevel = await _context.Connection.BeginTransactionAsync();
             using var cmdLevel = _context.Connection.CreateCommand();
@@ -119,6 +120,8 @@ namespace PrepareDataAPI.DBService
 
             using (var session = _cassandraContext.Connection.Connect())
             {
+                var dropQuery = new SimpleStatement(dropSql);
+                await session.ExecuteAsync(dropQuery);
                 var query = new SimpleStatement(sql);
                 await session.ExecuteAsync(query);
             }
