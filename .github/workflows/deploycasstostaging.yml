@@ -43,6 +43,11 @@ jobs:
       with:
         namespace: ${{ env.NAMESPACE  }}
         manifests: |
+          manifests/blob-secret-staging.yaml
+          manifests/pv-blob-input-staging.yaml
+          manifests/pv-blob-output-staging.yaml
+          manifests/pvc-blob-input-staging.yaml
+          manifests/pvc-blob-output-staging.yaml
           manifests/cassandraset.yaml
           manifests/cassandraservice.yaml
         images: |
