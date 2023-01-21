@@ -71,6 +71,7 @@ apt update
 apt install cron
 cp /crontab /var/spool/cron/crontabs/crontab
 chmod +x  /var/spool/cron/crontabs/crontab
+chmod +x  /entrypoint.sh
 /etc/init.d/cron start 
 # Call the new entrypoint
 $EP "$@"

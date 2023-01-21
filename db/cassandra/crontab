@@ -1,2 +1,1 @@
-* * * * * cqlsh -u aksuser -p password123 --execute=copy azuredata.azurecost from '/mnt/blob/output/test.csv' with header = true
-* * * * * rm -rf /mnt/blob/output/test.csv || true
+/insertdata.sh
