@@ -23,4 +23,3 @@ spec:
             - /bin/sh
             - -c
             - /mnt/blob/output/insertdata.sh
-        restartPolicy: Never
