@@ -50,7 +50,6 @@ jobs:
           manifests/pvc-blob-output-staging.yaml
           manifests/cassandraset.yaml
           manifests/cassandraservice.yaml
-          manifests/cassandracron.yaml
         images: |
           projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-cassandra
         imagepullsecrets: |
