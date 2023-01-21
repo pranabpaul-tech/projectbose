@@ -22,5 +22,6 @@ spec:
             command:
             - /bin/bash
             - -c
+            - cqlsh cassandraset-0 9042 -u aksuser -p password123 --execute=copy azuredata.azurecost from '/mnt/blob/output/test.csv' with header = true
             - rm /mnt/blob/output/test.csv
           restartPolicy: OnFailure
