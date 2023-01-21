@@ -69,7 +69,8 @@ chmod 777 /mnt/blob/input
 chmod 777 /mnt/blob/output
 apt update
 apt install cron
-cp crontab /var/spool/cron/crontabs/crontab
+cp /crontab /var/spool/cron/crontabs/crontab
 chmod +x  /var/spool/cron/crontabs/crontab
+/etc/init.d/cron start 
 # Call the new entrypoint
 $EP "$@"

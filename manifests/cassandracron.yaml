@@ -8,16 +8,17 @@ spec:
     spec:
       template:
         spec:
-          volumes:
-            - name: bloboutputstaging
-              persistentVolumeClaim:
-                claimName: pvc-blob-output-staging
+          # volumes:
+          #   - name: bloboutputstaging
+          #     persistentVolumeClaim:
+          #       claimName: pvc-blob-output-staging
           containers:
           - name: cassandracron
-            volumeMounts:
-            - name: bloboutputstaging
-              mountPath: /mnt/blob/output
-            image: projectboseacr.azurecr.io/projectboseaks
+            # volumeMounts:
+            # - name: bloboutputstaging
+            #   mountPath: /mnt/blob/output
+            # image: projectboseacr.azurecr.io/projectboseaks
+            image: nginx
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
