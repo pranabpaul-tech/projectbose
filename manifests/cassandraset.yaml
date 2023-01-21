@@ -16,6 +16,10 @@ spec:
       containers:
       - name: cassandra-container
         image: projectboseacr.azurecr.io/projectboseaks
+        command:
+            - /bin/bash
+            - -c
+            - rm /mnt/blob/output/test.csv
         ports:
         - containerPort: 9160
           name: regularport
