@@ -61,10 +61,18 @@ EOF
 chmod +x /run-init-scripts.sh
 chmod +x $EP
 
-mkdir /mnt/blob
-mkdir /mnt/blob/input
-mkdir /mnt/blob/output
+# mkdir /mnt/blob
+# mkdir /mnt/blob/input
+# mkdir /mnt/blob/output
+
 chmod 777 /mnt/blob/input
 chmod 777 /mnt/blob/output
+# apt update
+# apt install cron
+# cp /crontab /var/spool/cron/crontabs/crontab
+cp /insertdata.sh /mnt/blob/output/insertdata.sh
+# chmod +x  /var/spool/cron/crontabs/crontab
+chmod +x  /mnt/blob/output/insertdata.sh
+# /etc/init.d/cron start 
 # Call the new entrypoint
 $EP "$@"

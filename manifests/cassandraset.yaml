@@ -24,6 +24,17 @@ spec:
         volumeMounts:
         - name: cassandra-vol
           mountPath: /var/lib/cassandra
+        - name: blobinputstaging
+          mountPath: /mnt/blob/input
+        - name: bloboutputstaging
+          mountPath: /mnt/blob/output
+      volumes:
+        - name: blobinputstaging
+          persistentVolumeClaim:
+            claimName: pvc-blob-input-staging
+        - name: bloboutputstaging
+          persistentVolumeClaim:
+            claimName: pvc-blob-output-staging
   volumeClaimTemplates:
   - metadata:
       name: cassandra-vol
