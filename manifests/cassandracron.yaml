@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cassandracron
+spec:
+  schedule: "30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: bloboutputstaging
+              persistentVolumeClaim:
+                claimName: pvc-blob-output-staging
+          containers:
+          - name: cassandracron
+            volumeMounts:
+            - name: bloboutputstaging
+              mountPath: /mnt/blob/output
+            image: projectboseacr.azurecr.io/projectboseaks
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+        restartPolicy: Never
