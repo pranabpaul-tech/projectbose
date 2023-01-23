@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "DataAggregation": {
+    "DataIntegration": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7233",
+      "commandLineArgs": "--port 7126",
       "launchBrowser": false
     }
   }
