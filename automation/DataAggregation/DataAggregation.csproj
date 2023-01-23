@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
-    <UserSecretsId>eab57b94-7dca-4940-a6ae-a0ed51d8a522</UserSecretsId>
+    <UserSecretsId>bbc36e78-07aa-4797-9062-4612bab7b2b6</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.3.0" />

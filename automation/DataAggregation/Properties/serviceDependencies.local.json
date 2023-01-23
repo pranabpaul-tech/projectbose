@@ -16,7 +16,7 @@
       "containerName": "azurite",
       "containerImage": "mcr.microsoft.com/azure-storage/azurite",
       "type": "storage.container",
-      "connectionId": "LocalConString",
+      "connectionId": "DefaultEndpointsProtocol=https;AccountName=costdatastore;AccountKey=z8ePngH46F4ecY5thpsGd3oue0jtmK8Jol25KlVQEOVCHRnL3SljPsH31oU40dGhF9m8ZwaoaNt2+AStUF2wJQ==;EndpointSuffix=core.windows.net",
       "dynamicId": null
     }
   }
