@@ -19,7 +19,6 @@ namespace DataAggregation
     [StorageAccount("BlobConnectionString")]
     public class JsonCsv
     {
-
         [FunctionName("CsvJsonExchange")]
         public async Task Run([BlobTrigger("input/{name}")] Stream myBlob, string name, ILogger log)
         {
