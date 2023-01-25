@@ -22,6 +22,7 @@ namespace DataAggregation
         [FunctionName("CsvJsonExchange")]
         public async Task Run([BlobTrigger("input/{name}")] Stream myBlob, string name, ILogger log)
         {
+
             string jsonFromCsv = "";
             log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
 
