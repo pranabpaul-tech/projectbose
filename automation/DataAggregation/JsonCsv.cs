@@ -56,7 +56,6 @@ namespace DataAggregation
             {
                 log.LogInformation(ex.Message);
             }
-
         }
         private string Convert(Stream blob)
         {
