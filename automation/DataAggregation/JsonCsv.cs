@@ -54,7 +54,6 @@ namespace DataAggregation
             }
             catch (Exception ex)
             {
-
                 log.LogInformation(ex.Message);
             }
 
