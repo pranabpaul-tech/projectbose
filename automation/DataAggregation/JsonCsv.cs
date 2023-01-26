@@ -25,7 +25,6 @@ namespace DataAggregation
             string jsonFromCsv = "";
             log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
 
-
             //Only convert CSV files
             if (name.Contains(".csv"))
             {
