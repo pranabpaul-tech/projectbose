@@ -109,7 +109,7 @@ namespace PrepareDataAPI.DBService
 
         public async Task CreateAzureCostAsync()
         {
-            string sql = @"CREATE TABLE azuredata.azurecost(resourceid text PRIMARY KEY, resourcename text, resourcetype text, resourcegroupname text, subscriptionid text, region text, usagedate timestamp, project text, projectowner text, cost decimal";
+            string sql = @"CREATE TABLE azuredata.azurecost(resourceid text PRIMARY KEY, resourcename text, resourcetype text, resourcegroupname text, subscriptionid text, region text, usagedate timestamp, projectname text, projectownereail text, cost decimal";
             string dropSql = @"drop table if exists azuredata.azurecost";
             await _context.Connection.OpenAsync();
             using var txnLevel = await _context.Connection.BeginTransactionAsync();
@@ -171,7 +171,7 @@ namespace PrepareDataAPI.DBService
         /// <returns></returns>
         private dynamic GetCassandraData(Row reader)
         {
-            string[] colName = { "resourceid", "bu", "cost", "costcenter", "division", "project", "projectowner", "region", "resourcegroupname", "resourcename", "resourcetype", "subscriptionid", "usagedate" };
+            string[] colName = { "resourceid", "bu", "cost", "costcenter", "division", "projectname", "projectowneremail", "region", "resourcegroupname", "resourcename", "resourcetype", "subscriptionid", "usagedate" };
             var expandoObject = new ExpandoObject() as IDictionary<string, object>;
             for (int i = 0; i < reader.Length; i++)
             {

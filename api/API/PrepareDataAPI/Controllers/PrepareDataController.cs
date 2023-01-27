@@ -26,7 +26,7 @@ namespace PrepareDataAPI.Controllers
         }
 
         // POST: api/Preparedata
-        // should called once to create levelinfo table
+        // should called once to create levelinfo table in MySQL
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task PostPrepareData()
@@ -36,6 +36,7 @@ namespace PrepareDataAPI.Controllers
         }
 
         // PUT: api/Preparedata
+        // should called once to create azurecost table in cassandra
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
         public async Task CreateAzureCost()
