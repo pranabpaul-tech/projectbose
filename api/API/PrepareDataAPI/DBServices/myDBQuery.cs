@@ -92,8 +92,7 @@ namespace PrepareDataAPI.DBService
             {
                 resultData.Add(ex.Source + ": " + ex.Message);
                 //throw;
-            }
-            
+            }         
             return resultData;
         }
 
