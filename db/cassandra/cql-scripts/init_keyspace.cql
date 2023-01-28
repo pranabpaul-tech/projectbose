@@ -2,4 +2,5 @@ CREATE KEYSPACE azuredata WITH REPLICATION = {'class': 'SimpleStrategy', 'replic
 
 CREATE USER IF NOT EXISTS aksuser WITH PASSWORD 'password123';
 
+
 GRANT ALL PERMISSONS ON KEYSPACE azuredata TO aksuser;
