@@ -116,6 +116,7 @@ BEGIN
       DEALLOCATE PREPARE stmt;
 END$$
 
+
 DELIMITER ;
 
 CREATE USER 'aksuser'@'10.0.0.%' IDENTIFIED BY 'password123';
