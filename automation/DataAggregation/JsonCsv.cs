@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Data;
 using System.Xml;
+using System.Reflection.Metadata;
 
 namespace DataAggregation
 {
@@ -113,23 +114,60 @@ namespace DataAggregation
             JArray jr2 = JArray.Parse(jsonResourceLevel);
             JArray jr3 = new JArray();
 
-            jr1.Merge(jr2, new JsonMergeSettings
+            foreach (JObject item1 in jr1)
             {
-                // union array values together to avoid duplicates
-                MergeArrayHandling = MergeArrayHandling.Merge
-            });
-            foreach (JObject item in jr1)
-            {
-                item.Remove("resourcedetailid");
-                item.Remove("leveldetailid");
-                var jToken = item.SelectToken("resourceid");
-                if (jToken != null)
+                JObject item3 = new JObject();
+                var resourcegroupname1 = item1.GetValue("resourcegroupname");
+                var subscriptionid1 = item1.GetValue("subscriptionid");
+                //if (!String.IsNullOrEmpty(resourcegroupname1.ToString()) || !String.IsNullOrEmpty(subscriptionid1.ToString()))
+                //{
+                foreach (JObject item2 in jr2)
                 {
-                    jr3.Add(item);
+                    var resourcegroupname2 = item2.GetValue("resourcegroupname");
+                    var subscriptionid2 = item2.GetValue("subscriptionid");
+                    List<string> keys = item2.Properties().Select(p => p.Name).ToList();
+                    //if (!String.IsNullOrEmpty(resourcegroupname2.ToString()) || !String.IsNullOrEmpty(subscriptionid2.ToString()))
+                    //{
+                    if (resourcegroupname1.ToString().Trim() == resourcegroupname2.ToString().Trim() && subscriptionid1.ToString().Trim() == subscriptionid2.ToString().Trim())
+                    {
+                        item3.TryAdd("usagedate", item1.GetValue("usagedate"));
+                        item3.TryAdd("resourcename", item1.GetValue("resourcename"));
+                        item3.TryAdd("region", item1.GetValue("region"));
+                        item3.TryAdd("resourcetype", item1.GetValue("resourcetype"));
+                        item3.TryAdd("cost", item1.GetValue("cost"));
+                        item3.TryAdd("projectname", item2.GetValue("projectname"));
+                        item3.TryAdd("projectowneremail", item2.GetValue("projectowneremail"));
+                        for (int i = 0; i < keys.Count; i++)
+                        {
+                            item3.TryAdd(keys[i].ToString(), item2.GetValue(keys[i].ToString()));
+                        }
+                        item3.Remove("resourcedetailid");
+                        item3.Remove("leveldetailid");
+                        jr3.Add(item3);
+                    }
                 }
+                //}
             }
+            //}
             var csvList = JsonStringToCSV(jr3.ToString());
             return csvList;
         }
-    }
-}
+
+        //    jr2.Merge(jr1, new JsonMergeSettings
+        //{
+        //    // union array values together to avoid duplicates
+        //    MergeArrayHandling = MergeArrayHandling.Merge
+        //});
+        //foreach (JObject item in jr2)
+        //{
+        //    item.Remove("resourcedetailid");
+        //    item.Remove("leveldetailid");
+        //    var jToken = item.SelectToken("resourceid");
+        //    if (jToken != null)
+        //    {
+        //        jr3.Add(item);
+        //    }
+        //}
+      }
+            
+  }
