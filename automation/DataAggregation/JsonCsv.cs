@@ -130,6 +130,7 @@ namespace DataAggregation
                     //{
                     if (resourcegroupname1.ToString().Trim() == resourcegroupname2.ToString().Trim() && subscriptionid1.ToString().Trim() == subscriptionid2.ToString().Trim())
                     {
+                        item3.TryAdd("resourceid", item1.GetValue("resourceid"));
                         item3.TryAdd("usagedate", item1.GetValue("usagedate"));
                         item3.TryAdd("resourcename", item1.GetValue("resourcename"));
                         item3.TryAdd("region", item1.GetValue("region"));
