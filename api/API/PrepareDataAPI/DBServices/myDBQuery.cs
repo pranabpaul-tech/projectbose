@@ -108,7 +108,7 @@ namespace PrepareDataAPI.DBService
 
         public async Task CreateAzureCostAsync()
         {
-            string sql = @"CREATE TABLE azuredata.azurecost(resourceid text PRIMARY KEY, resourcename text, resourcetype text, resourcegroupname text, subscriptionid text, region text, usagedate timestamp, projectname text, projectowneremail text, cost decimal";
+            string sql = @"CREATE TABLE azuredata.azurecost( resourceid text PRIMARY KEY, resourcename text, resourcetype text, resourcegroupname text, subscriptionid text, region text, usagedate timestamp, projectname text, projectowneremail text, cost decimal";
             string dropSql = @"drop table if exists azuredata.azurecost";
             await _context.Connection.OpenAsync();
             using var txnLevel = await _context.Connection.BeginTransactionAsync();
