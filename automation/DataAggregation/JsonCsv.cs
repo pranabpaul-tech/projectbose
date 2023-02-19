@@ -47,7 +47,8 @@ namespace DataAggregation
                 Stream outBlob = new MemoryStream();
                 outBlob.Write(dataAsBytes);
                 outBlob.Position = 0;
-                var fileName = System.Guid.NewGuid().ToString() + ".csv";
+                //var fileName = System.Guid.NewGuid().ToString() + ".csv";
+                var fileName = "outputdata.csv";
                 var containerName = "output";
                 var blobClient = new BlobContainerClient(Environment.GetEnvironmentVariable("BlobConnectionString"), containerName);
                 var blob = blobClient.GetBlobClient(fileName);
