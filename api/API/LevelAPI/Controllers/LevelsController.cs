@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LevelAPI.DBService;
 using LevelAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace LevelAPI.Controllers
 {
+    [EnableCors("_myAllowSpecificOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class LevelsController : ControllerBase
