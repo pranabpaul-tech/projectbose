@@ -21,6 +21,7 @@ internal class Program
                               {
                                   policy.WithOrigins("http://localhost:3000")
                                   .WithHeaders(HeaderNames.ContentType, "application/json")
+                                  .WithHeaders(HeaderNames.Accept, "application/json")
                                   .WithMethods("POST", "PUT", "DELETE", "GET");
                               });
         });
