@@ -24,6 +24,7 @@ namespace ResourcedetailAPI.Controllers
         }
 
         // GET: api/Resourcedetails
+        [EnableCors]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Resourcedetail>>> GetResourcedetails()
         {
@@ -31,6 +32,7 @@ namespace ResourcedetailAPI.Controllers
         }
 
         // GET: api/Resourcedetails/5
+        [EnableCors]
         [HttpGet("{id}")]
         public async Task<ActionResult<Resourcedetail>> GetResourcedetail(int id)
         {
@@ -46,6 +48,7 @@ namespace ResourcedetailAPI.Controllers
 
         // PUT: api/Resourcedetails/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [EnableCors]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutResourcedetail(int id, Resourcedetail resourcedetail)
         {
@@ -77,6 +80,7 @@ namespace ResourcedetailAPI.Controllers
 
         // POST: api/Resourcedetails
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [EnableCors]
         [HttpPost]
         public async Task<ActionResult<Resourcedetail>> PostResourcedetail(Resourcedetail resourcedetail)
         {
@@ -87,6 +91,7 @@ namespace ResourcedetailAPI.Controllers
         }
 
         // DELETE: api/Resourcedetails/5
+        [EnableCors]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteResourcedetail(int id)
         {
