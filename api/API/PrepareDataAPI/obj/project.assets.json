@@ -4005,11 +4005,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\PrepareDataAPI\\PrepareDataAPI.csproj",
+      "projectUniqueName": "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\PrepareDataAPI\\PrepareDataAPI.csproj",
       "projectName": "PrepareDataAPI",
-      "projectPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\PrepareDataAPI\\PrepareDataAPI.csproj",
+      "projectPath": "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\PrepareDataAPI\\PrepareDataAPI.csproj",
       "packagesPath": "C:\\Users\\pranabp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\PrepareDataAPI\\obj\\",
+      "outputPath": "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\PrepareDataAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4079,7 +4079,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
