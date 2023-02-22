@@ -18,7 +18,8 @@ internal class Program
             options.AddPolicy(name: MyAllowSpecificOrigins,
                               policy =>
                               {
-                                  policy.WithOrigins("http://localhost:3000");
+                                  policy.WithOrigins("http://localhost:3000")
+                                  .WithMethods("POST", "PUT", "DELETE", "GET");
                               });
         });
         // Add services to the container.
