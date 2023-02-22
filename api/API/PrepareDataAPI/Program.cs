@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using PrepareDataAPI.DBService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("http://localhost:3000")
+                          .WithHeaders(HeaderNames.ContentType, "application/json")
                           .WithMethods("POST", "PUT", "DELETE", "GET");
                       });
 });

@@ -6,6 +6,7 @@ using Azure.Identity;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using Microsoft.Net.Http.Headers;
 
 internal class Program
 {
@@ -19,6 +20,7 @@ internal class Program
                               policy =>
                               {
                                   policy.WithOrigins("http://localhost:3000")
+                                  .WithHeaders(HeaderNames.ContentType, "application/json")
                                   .WithMethods("POST", "PUT", "DELETE", "GET");
                               });
         });

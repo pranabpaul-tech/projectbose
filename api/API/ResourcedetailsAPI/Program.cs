@@ -5,6 +5,7 @@ using Google.Protobuf.WellKnownTypes;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using Microsoft.Net.Http.Headers;
 
 internal class Program
 {
@@ -18,6 +19,7 @@ internal class Program
                               policy =>
                               {
                                   policy.WithOrigins("http://localhost:3000")
+                                  .WithHeaders(HeaderNames.ContentType, "application/json")
                                   .WithMethods("POST", "PUT", "DELETE", "GET");
                               });
         });
