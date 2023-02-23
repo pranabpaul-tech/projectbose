@@ -24,7 +24,7 @@ namespace LevelAPI.Controllers
         }
 
         // GET: api/Levels
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Level>>> GetLevels()
         {
@@ -32,7 +32,7 @@ namespace LevelAPI.Controllers
         }
 
         // GET: api/Levels/5
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Level>> GetLevel(int id)
         {
@@ -48,7 +48,7 @@ namespace LevelAPI.Controllers
 
         // PUT: api/Levels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLevel(int id, Level level)
         {
@@ -80,7 +80,7 @@ namespace LevelAPI.Controllers
 
         // POST: api/Levels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPost]
         public async Task<ActionResult<Level>> PostLevel(Level level)
         {
@@ -91,7 +91,7 @@ namespace LevelAPI.Controllers
         }
 
         // DELETE: api/Levels/5
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLevel(int id)
         {

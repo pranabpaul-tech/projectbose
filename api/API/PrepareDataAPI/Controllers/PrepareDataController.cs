@@ -20,7 +20,7 @@ namespace PrepareDataAPI.Controllers
         }
 
         // GET: api/Preparedata/resourceLevel
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet("{data}")]
         public async Task<ActionResult<List<dynamic>>> GetResourceLevel()
         {
@@ -31,7 +31,7 @@ namespace PrepareDataAPI.Controllers
         // POST: api/Preparedata
         // should called once to create levelinfo table in MySQL
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPost]
         public async Task PostPrepareData()
         {
@@ -42,7 +42,7 @@ namespace PrepareDataAPI.Controllers
         // PUT: api/Preparedata
         // should called once to create azurecost table in cassandra
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPut]
         public async Task CreateAzureCost()
         {
@@ -52,7 +52,7 @@ namespace PrepareDataAPI.Controllers
 
         // GET: api/Preparedata
         // to protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet]
         public async Task<ActionResult<List<dynamic>>> GetAzureCost()
         {
