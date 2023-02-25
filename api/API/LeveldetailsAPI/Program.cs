@@ -17,7 +17,7 @@ internal class Program
             options.AddPolicy(name: MyAllowSpecificOrigins,
                               policy =>
                               {
-                                  policy.WithOrigins("http://localhost:3000")
+                                  policy.WithOrigins("http://localhost:3000", "https://white-field-09fbc4a03.2.azurestaticapps.net/")
                                   .WithHeaders(HeaderNames.ContentType, "application/json")
                                   .WithHeaders(HeaderNames.Accept, "application/json")
                                   .WithMethods("POST", "PUT", "DELETE", "GET");
