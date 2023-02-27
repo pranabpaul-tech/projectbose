@@ -9,7 +9,6 @@ export class Home extends Component{
             fetch(process.env.REACT_APP_API+'Preparedata/',requestOptions);
         }
     }
-
     prepareAzureCost(){
         if(window.confirm('Are you sure?')){
             const requestOptions = {method: 'PUT'};
