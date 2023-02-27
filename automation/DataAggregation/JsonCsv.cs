@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Xml;
 using System.Reflection.Metadata;
+using Microsoft.Azure.Documents.SystemFunctions;
 
 namespace DataAggregation
 {
@@ -21,7 +22,7 @@ namespace DataAggregation
     public class JsonCsv
     {
         [FunctionName("CsvJsonExchange")]
-        public async Task Run([BlobTrigger("input/{name}")] Stream myBlob, string name, ILogger log)
+        public async Task Run([BlobTrigger("input/azurecost/azurecost/{name}")] Stream myBlob, string name, ILogger log)
         {
             string jsonFromCsv = "";
             log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
@@ -46,7 +47,8 @@ namespace DataAggregation
                 Stream outBlob = new MemoryStream();
                 outBlob.Write(dataAsBytes);
                 outBlob.Position = 0;
-                var fileName = System.Guid.NewGuid().ToString() + ".csv";
+                //var fileName = System.Guid.NewGuid().ToString() + ".csv";
+                var fileName = "outputdata.csv";
                 var containerName = "output";
                 var blobClient = new BlobContainerClient(Environment.GetEnvironmentVariable("BlobConnectionString"), containerName);
                 var blob = blobClient.GetBlobClient(fileName);
@@ -117,8 +119,8 @@ namespace DataAggregation
             foreach (JObject item1 in jr1)
             {
                 JObject item3 = new JObject();
-                var resourcegroupname1 = item1.GetValue("resourcegroupname");
-                var subscriptionid1 = item1.GetValue("subscriptionid");
+                var resourcegroupname1 = item1.GetValue("ResourceGroup");
+                var subscriptionid1 = item1.GetValue("SubscriptionGuid");
                 //if (!String.IsNullOrEmpty(resourcegroupname1.ToString()) || !String.IsNullOrEmpty(subscriptionid1.ToString()))
                 //{
                 foreach (JObject item2 in jr2)
@@ -130,12 +132,12 @@ namespace DataAggregation
                     //{
                     if (resourcegroupname1.ToString().Trim() == resourcegroupname2.ToString().Trim() && subscriptionid1.ToString().Trim() == subscriptionid2.ToString().Trim())
                     {
-                        item3.TryAdd("resourceid", item1.GetValue("resourceid"));
-                        item3.TryAdd("usagedate", item1.GetValue("usagedate"));
-                        item3.TryAdd("resourcename", item1.GetValue("resourcename"));
-                        item3.TryAdd("region", item1.GetValue("region"));
-                        item3.TryAdd("resourcetype", item1.GetValue("resourcetype"));
-                        item3.TryAdd("cost", item1.GetValue("cost"));
+                        item3.TryAdd("resourceid", item1.GetValue("MeterId"));
+                        item3.TryAdd("usagedate", item1.GetValue("UsageDateTime"));
+                        item3.TryAdd("resourcename", item1.GetValue("InstanceId"));
+                        item3.TryAdd("region", item1.GetValue("ResourceLocation"));
+                        item3.TryAdd("resourcetype", item1.GetValue("MeterCategory"));
+                        item3.TryAdd("cost", item1.GetValue("PreTaxCost"));
                         item3.TryAdd("projectname", item2.GetValue("projectname"));
                         item3.TryAdd("projectowneremail", item2.GetValue("projectowneremail"));
                         for (int i = 0; i < keys.Count; i++)
