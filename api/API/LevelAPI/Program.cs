@@ -6,15 +6,26 @@ using Azure.Identity;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using Microsoft.Net.Http.Headers;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
+        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         var builder = WebApplication.CreateBuilder(args);
-
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                              policy =>
+                              {
+                                  policy.WithOrigins("http://localhost:3000", "https://white-field-09fbc4a03.2.azurestaticapps.net")
+                                  .WithHeaders(HeaderNames.ContentType, "application/json")
+                                  .WithHeaders(HeaderNames.Accept, "application/json")
+                                  .WithMethods("POST", "PUT", "DELETE", "GET");
+                              });
+        });
         // Add services to the container.
-
         ConfigurationManager configuration = builder.Configuration;
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -55,6 +66,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseCors(MyAllowSpecificOrigins);
 
         app.UseAuthorization();
 

@@ -1,8 +1,21 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using PrepareDataAPI.DBService;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000", "https://white-field-09fbc4a03.2.azurestaticapps.net")
+                          .WithHeaders(HeaderNames.ContentType, "application/json")
+                          .WithHeaders(HeaderNames.Accept, "application/json")
+                          .WithMethods("POST", "PUT", "DELETE", "GET");
+                      });
+});
 ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
@@ -51,6 +64,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

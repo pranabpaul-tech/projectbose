@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ResourcedetailsAPI.Models;
 
 namespace ResourcedetailAPI.Controllers
 {
+    [EnableCors("_myAllowSpecificOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class ResourcedetailsController : ControllerBase
@@ -22,6 +24,7 @@ namespace ResourcedetailAPI.Controllers
         }
 
         // GET: api/Resourcedetails
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Resourcedetail>>> GetResourcedetails()
         {
@@ -29,6 +32,7 @@ namespace ResourcedetailAPI.Controllers
         }
 
         // GET: api/Resourcedetails/5
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Resourcedetail>> GetResourcedetail(int id)
         {
@@ -44,6 +48,7 @@ namespace ResourcedetailAPI.Controllers
 
         // PUT: api/Resourcedetails/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutResourcedetail(int id, Resourcedetail resourcedetail)
         {
@@ -75,6 +80,7 @@ namespace ResourcedetailAPI.Controllers
 
         // POST: api/Resourcedetails
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpPost]
         public async Task<ActionResult<Resourcedetail>> PostResourcedetail(Resourcedetail resourcedetail)
         {
@@ -85,6 +91,7 @@ namespace ResourcedetailAPI.Controllers
         }
 
         // DELETE: api/Resourcedetails/5
+        [EnableCors("_myAllowSpecificOrigins")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteResourcedetail(int id)
         {
