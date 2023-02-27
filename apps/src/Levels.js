@@ -37,7 +37,6 @@ export class Levels extends Component{
 
     deleteLevel(levelid){
         if(window.confirm('Are you sure?')){
-            alert(levelid);
             const requestOptions = {method: 'DELETE'};
             fetch(process.env.REACT_APP_API+'Levels/'+levelid,requestOptions);
         }
