@@ -11,6 +11,7 @@ export class Levels extends Component{
         super(props);
         this.state={levels:[], addModalShow:false, editModalShow:false}
     }
+    
     refreshList(){
         let url = process.env.REACT_APP_API+'Levels';
         alert(url)
