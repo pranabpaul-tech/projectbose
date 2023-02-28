@@ -18,7 +18,6 @@ export class Levels extends Component{
         method: "GET",
         cache: 'no-cache'
         };
-        alert(url);
         fetch(url, config)
         //fetch(process.env.REACT_APP_API+'Levels')
         .then(response=>response.json())
