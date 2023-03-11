@@ -3,10 +3,16 @@
   "contentVersion": "1.0.0.5",
   "parameters": {
     "subscription_id": {
-      "value": "118ae9f9-9038-414c-ba64-08c5056602d1"
+      "value": "d1036149-c113-45d5-a65b-ae5f0eb239ea"
     },
-    "vault_name": {
-      "value": "projectbosekeyvault"
+    "resourcegroupname": {
+      "value": "codenameprojectboserg"
+    },
+    "deployment_location": {
+      "value": "westeurope"
+    },
+    "cluster_deployment_location": {
+      "value": "West Europe"
     },
     "virtualNetwork_name": {
       "value": "projectbosevnet"
@@ -21,22 +27,31 @@
       "value": "10.0.0.0/24"
     },
     "registries_name": {
-      "value": "projectboseacr"
+      "value": "acrprojectbose"
     },
     "registries_sku": {
       "value": "Standard"
     },
+    "publicIPAddresses_projectboseip_name": {
+      "value": "projectboseip"
+    },
     "managedCluster_name": {
       "value": "projectboseaks"
     },
-    "Mykeysecret_Value": {
-      "value": "server=mysqlservice;port=3306;user=aksuser;password=password123;database=mydb;CharSet=utf8"
-    },
-    "Cassandrakeysecret_Value": {
-      "value": "server=cassabdraservice;port=9160;user=aksuser;password=password123;keyspace=azuredata"
-    },
     "staticSites_name": {
       "value": "projectbosewebapp"
+    },
+    "virtualNetworks_codenameprojectboserg_vnet_externalid": {
+      "value": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/codenameprojectboserg/providers/Microsoft.Network/virtualNetworks/codenameprojectboserg-vnet"
+    },
+    "workspaces_DefaultWorkspace_externalid": {
+      "value": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-d1036149-c113-45d5-a65b-ae5f0eb239ea-WEU"
+    },
+    "publicIPAddresses_externalid": {
+      "value": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/MC_codenameprojectboserg_projectboseaks_westeurope/providers/Microsoft.Network/publicIPAddresses/d1036149-c113-45d5-a65b-ae5f0eb239ea"
+    },
+    "userAssignedIdentities_codenameprojectboserg_agentpool_externalid": {
+      "value": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/MC_codenameprojectboserg_projectboseaks_westeurope/providers/Microsoft.ManagedIdentity/userAssignedIdentities/codenameprojectboserg-agentpool"
     }
   }
 }

@@ -3,3 +3,4 @@ C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\bin\Debug\azuredeplo
 C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\bin\Debug\Deploy-AzureResourceGroup.ps1
 C:\Users\pranabp\source\repos\projectbose\infra\infra\infra\obj\Debug\infra.deployproj.CoreCompileInputs.cache
 C:\Users\pranabp\source\repos\projectbose\infra\infra\obj\Debug\infra.deployproj.CoreCompileInputs.cache
+C:\Users\pranabp\projectbose\infra\infra\obj\Debug\infra.deployproj.CoreCompileInputs.cache

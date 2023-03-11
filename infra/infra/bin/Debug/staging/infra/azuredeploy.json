@@ -5,24 +5,9 @@
     "subscription_id": {
       "type": "String"
     },
-    "virtualNetworks_projectboserg_vnet_externalid": {
-      "defaultValue": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/projectboserg/providers/Microsoft.Network/virtualNetworks/projectboserg-vnet",
-      "type": "String"
-    },
-    "workspaces_DefaultWorkspace_externalid": {
-      "defaultValue": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-d1036149-c113-45d5-a65b-ae5f0eb239ea-WEU",
-      "type": "String"
-    },
-    "publicIPAddresses_externalid": {
-      "defaultValue": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/MC_projectboserg_projectboseaks_westeurope/providers/Microsoft.Network/publicIPAddresses/6dc877d0-3cc6-4ae7-809e-15c874287917",
-      "type": "String"
-    },
-    "userAssignedIdentities_projectboserg_agentpool_externalid": {
-      "defaultValue": "/subscriptions/d1036149-c113-45d5-a65b-ae5f0eb239ea/resourceGroups/MC_projectboserg_projectboseaks_westeurope/providers/Microsoft.ManagedIdentity/userAssignedIdentities/projectboserg-agentpool",
-      "type": "String"
-    },
-    "vault_name": {
-      "type": "String"
+    "resourcegroupname": {
+      "type": "String",
+      "defaultValue": "codenameprojectboserg"
     },
     "virtualNetwork_name": {
       "type": "String"
@@ -31,12 +16,10 @@
       "type": "String"
     },
     "deployment_location": {
-      "type": "String",
-      "defaultValue": "westeurope"
+      "type": "String"
     },
     "cluster_deployment_location": {
-      "type": "String",
-      "defaultValue": "West Europe"
+      "type": "String"
     },
     "addressPrefixes_vnet": {
       "type": "String"
@@ -53,10 +36,7 @@
     "managedCluster_name": {
       "type": "String"
     },
-    "Mykeysecret_Value": {
-      "type": "String"
-    },
-    "Cassandrakeysecret_Value": {
+    "publicIPAddresses_projectboseip_name": {
       "type": "String"
     },
     "staticSites_name": {
@@ -68,6 +48,18 @@
     },
     "adminUsername": {
       "defaultValue": "azureuser",
+      "type": "String"
+    },
+    "virtualNetworks_codenameprojectboserg_vnet_externalid": {
+      "type": "String"
+    },
+    "workspaces_DefaultWorkspace_externalid": {
+      "type": "String"
+    },
+    "publicIPAddresses_externalid": {
+      "type": "String"
+    },
+    "userAssignedIdentities_codenameprojectboserg_agentpool_externalid": {
       "type": "String"
     }
   },
@@ -262,8 +254,8 @@
             }
           }
         },
-          "nodeResourceGroup": "[concat('MC_', resourceGroup().name, '_', parameters('managedCluster_name'), '_', parameters('deployment_location'))]",
-          "enableRBAC": true,
+        "nodeResourceGroup": "[concat('MC_', resourceGroup().name, '_', parameters('managedCluster_name'), '_', parameters('deployment_location'))]",
+        "enableRBAC": true,
         "networkProfile": {
           "networkPlugin": "azure",
           "networkPolicy": "azure",
@@ -281,7 +273,7 @@
           },
           "identityProfile": {
             "kubeletidentity": {
-              "resourceId": "[parameters('userAssignedIdentities_projectboserg_agentpool_externalid')]",
+              "resourceId": "[parameters('userAssignedIdentities_codenameprojectboserg_agentpool_externalid')]",
               "clientId": "336f8cdd-0faa-4578-9330-f2bc88ce3f3f",
               "objectId": "6f897df8-7fce-4ba6-b5f8-e53ae1fde2fc"
             }
@@ -316,121 +308,6 @@
             "IPv4"
           ]
         }
-        }
-      },
-    //Keyvault Secret - MySQL
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2022-07-01",
-      "name": "[concat(parameters('vault_name'), '/ConnectionStrings--MySQLRemoteConection')]",
-      "location": "westeurope",
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', parameters('vault_name'))]"
-      ],
-      "tags": {
-        "file-encoding": "utf-8"
-      },
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[parameters('Mykeysecret_Value')]"
-      }
-    },
-    //Keyvault Secret - Cassandra
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2022-07-01",
-      "name": "[concat(parameters('vault_name'), '/ConnectionStrings--CassandraRemoteConection')]",
-      "location": "westeurope",
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', parameters('vault_name'))]"
-      ],
-      "tags": {
-        "file-encoding": "utf-8"
-      },
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[parameters('Cassandrakeysecret_Value')]"
-      }
-    },
-    //Keyvault section
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "apiVersion": "2022-07-01",
-      "name": "[parameters('vault_name')]",
-      "location": "[parameters('deployment_location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name'))]"
-      ],
-      "properties": {
-        "sku": {
-          "family": "A",
-          "name": "standard"
-        },
-        "tenantId": "[subscription().tenantid]",
-        "accessPolicies": [
-          {
-            "tenantId": "[subscription().tenantid]",
-            "objectId": "[reference(resourceId('Microsoft.ContainerService/managedClusters', parameters('managedCluster_name')), '2022-07-01').identityProfile.kubeletidentity.objectId]",
-            "permissions": {
-              "keys": [
-                "get",
-                "create",
-                "delete",
-                "list",
-                "update",
-                "import",
-                "backup",
-                "restore",
-                "recover"
-              ],
-              "secrets": [
-                "get",
-                "list",
-                "set",
-                "delete",
-                "backup",
-                "restore",
-                "recover"
-              ],
-              "certificates": [
-                "get",
-                "list",
-                "delete",
-                "create",
-                "import",
-                "update",
-                "managecontacts",
-                "getissuers",
-                "listissuers",
-                "setissuers",
-                "deleteissuers",
-                "manageissuers",
-                "recover"
-              ],
-              "storage": [
-                "get",
-                "list",
-                "delete",
-                "set",
-                "update",
-                "regeneratekey",
-                "setsas",
-                "listsas",
-                "getsas",
-                "deletesas"
-              ]
-            }
-          }
-        ],
-        "enabledForDeployment": false,
-        "enableSoftDelete": true,
-        "softDeleteRetentionInDays": 90,
-        "vaultUri": "[concat('https://', parameters('vault_name'), '.vault.azure.net/')]",
-        "provisioningState": "Succeeded"
       }
     },
     //AKS cluster agentpool section
@@ -470,6 +347,26 @@
         "osType": "Linux",
         "osSKU": "Ubuntu",
         "enableFIPS": false
+      }
+    },
+    //Public IP Section
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2022-07-01",
+      "name": "[parameters('publicIPAddresses_projectboseip_name')]",
+      "location": "[parameters('deployment_location')]",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": [],
+        "ddosSettings": {
+          "protectionMode": "VirtualNetworkInherited"
+        }
       }
     },
     //Static Web section
