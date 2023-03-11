@@ -3,10 +3,7 @@
     "",
     "\\.github",
     "\\.github\\workflows",
-    "\\api",
-    "\\api\\API",
-    "\\manifests"
+    "\\infra"
   ],
-  "SelectedNode": "\\.github\\workflows\\LevelAPIStaging.yml",
   "PreviewInSolutionExplorer": false
 }
