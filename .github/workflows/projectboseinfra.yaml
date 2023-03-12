@@ -1,8 +1,8 @@
 name: Project Bose - Application protfolio and Azure cost analysis
 
 on:
-  push:
-    branches: [ infra ]    
+  pull_request:
+    branches: [ main ]    
     paths: infra/**
 
   workflow_dispatch:
