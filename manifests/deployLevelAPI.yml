@@ -1,0 +1,20 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "leveldeploy"
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "leveldeploy"
+  template:
+    metadata:
+      labels:
+        app: "leveldeploy"
+    spec:
+      containers:
+        - name: "leveldeploy"
+          image: "projectboseacr.azurecr.io/projectboseaks"
+          ports:
+          - containerPort: 80

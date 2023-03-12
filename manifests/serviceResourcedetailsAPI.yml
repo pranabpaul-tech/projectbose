@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "resourcedetailsservice"
+    labels:
+        app: "resourcedetailsdeploy"
+spec:
+    #type: LoadBalancer
+    #loadBalancerIP: 20.103.72.246
+    ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    selector:
+        app: "resourcedetailsdeploy"

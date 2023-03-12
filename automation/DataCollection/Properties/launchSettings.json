@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DataCollection": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7237",
+      "launchBrowser": false
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "BlobConnectionString": "DefaultEndpointsProtocol=https;AccountName=projectboseazurecost;AccountKey=vvFIZ8aQGvKskwReQHqw5E4IxtiWN3DmTwjGqqQtuLbHHFARpF7kqB6mKuRRGm3736JqjCFcfR8Y+AStOrpveg==;EndpointSuffix=core.windows.net",
+    "ResourceLevelAPI": "http://52.174.7.234/api/PrepareData/resourcelevel"
+
+  }
+}
