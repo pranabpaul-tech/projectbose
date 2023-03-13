@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 env:
-  region: northeurope
-  regGroup: defenderdemorg
+  region: westeurope
+  regGroup: codenameprojectboserg
   
 jobs:
   validation:

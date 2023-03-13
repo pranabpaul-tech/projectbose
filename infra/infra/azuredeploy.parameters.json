@@ -3,10 +3,16 @@
   "contentVersion": "1.0.0.5",
   "parameters": {
     "subscription_id": {
-      "value": "118ae9f9-9038-414c-ba64-08c5056602d1"
+      "value": "<your-subscription-id>"
     },
-    "vault_name": {
-      "value": "projectbosekeyvault"
+    "resourcegroupname": {
+      "value": "<your-resourcegroup-name>"
+    },
+    "deployment_location": {
+      "value": "westeurope"
+    },
+    "cluster_deployment_location": {
+      "value": "West Europe"
     },
     "virtualNetwork_name": {
       "value": "projectbosevnet"
@@ -21,22 +27,32 @@
       "value": "10.0.0.0/24"
     },
     "registries_name": {
-      "value": "projectboseacr"
+      "value": "acrprojectbose"
     },
     "registries_sku": {
       "value": "Standard"
     },
+    "publicIPAddresses_projectboseip_name": {
+      "value": "projectboseip"
+    },
     "managedCluster_name": {
       "value": "projectboseaks"
     },
-    "Mykeysecret_Value": {
-      "value": "server=mysqlservice;port=3306;user=aksuser;password=password123;database=mydb;CharSet=utf8"
-    },
-    "Cassandrakeysecret_Value": {
-      "value": "server=cassabdraservice;port=9160;user=aksuser;password=password123;keyspace=azuredata"
-    },
     "staticSites_name": {
       "value": "projectbosewebapp"
+    },
+    "virtualNetworks_<your-resourcegroup-name>_vnet_externalid": {
+      "value": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resourcegroup-name>/providers/Microsoft.Network/virtualNetworks/<your-resourcegroup-name>-vnet"
+    },
+    "workspaces_DefaultWorkspace_externalid": {
+      "value": "/subscriptions/<your-subscription-id>/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-<your-subscription-id>-WEU"
+    },
+    "publicIPAddresses_externalid": {
+      "value": "/subscriptions/<your-subscription-id>/resourceGroups/MC_<your-resourcegroup-name>_projectboseaks_westeurope/providers/Microsoft.Network/publicIPAddresses/<your-subscription-id>"
+    },
+    "userAssignedIdentities_<your-resourcegroup-name>_agentpool_externalid": {
+      "value": "/subscriptions/<your-subscription-id>/resourceGroups/MC_<your-resourcegroup-name>_projectboseaks_westeurope/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<your-resourcegroup-name>-agentpool"
     }
   }
+
 }
