@@ -7,7 +7,7 @@
     },
     "resourcegroupname": {
       "type": "String",
-      "defaultValue": "codenameprojectboserg"
+      "defaultValue": "<your-resourcegroup-name>"
     },
     "virtualNetwork_name": {
       "type": "String"
@@ -50,7 +50,7 @@
       "defaultValue": "azureuser",
       "type": "String"
     },
-    "virtualNetworks_codenameprojectboserg_vnet_externalid": {
+    "virtualNetworks_<your-resourcegroup-name>_vnet_externalid": {
       "type": "String"
     },
     "workspaces_DefaultWorkspace_externalid": {
@@ -59,7 +59,7 @@
     "publicIPAddresses_externalid": {
       "type": "String"
     },
-    "userAssignedIdentities_codenameprojectboserg_agentpool_externalid": {
+    "userAssignedIdentities_<your-resourcegroup-name>_agentpool_externalid": {
       "type": "String"
     }
   },
@@ -273,7 +273,7 @@
           },
           "identityProfile": {
             "kubeletidentity": {
-              "resourceId": "[parameters('userAssignedIdentities_codenameprojectboserg_agentpool_externalid')]",
+              "resourceId": "[parameters('userAssignedIdentities_<your-resourcegroup-name>_agentpool_externalid')]",
               "clientId": "336f8cdd-0faa-4578-9330-f2bc88ce3f3f",
               "objectId": "6f897df8-7fce-4ba6-b5f8-e53ae1fde2fc"
             }
