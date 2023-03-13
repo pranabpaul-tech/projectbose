@@ -27,7 +27,7 @@
       "value": "10.0.0.0/24"
     },
     "registries_name": {
-      "value": "acrprojectbose"
+      "value": "projectboseacr"
     },
     "registries_sku": {
       "value": "Standard"
