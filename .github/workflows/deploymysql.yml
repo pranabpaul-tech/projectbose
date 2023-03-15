@@ -14,7 +14,7 @@ env:
         ./manifests/mysqlsecret.yaml
         ./manifests/mysqlset.yaml
         ./manifests/mysqlservice.yaml
-        
+
 jobs:
     buildImage:
         permissions:
@@ -30,7 +30,7 @@ jobs:
                 subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
                 tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }}-mysql --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./api/API/LevelAPI/Dockerfile ./
+              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }}-mysql --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./db/mysql/Dockerfile ./
     deploy:
         permissions:
             actions: read
