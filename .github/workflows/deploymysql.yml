@@ -5,6 +5,7 @@ name: projectbose
             - db
     workflow_dispatch: {}
 env:
+    NAMESPACE: projectbose
     ACR_RESOURCE_GROUP: projectboserg
     AZURE_CONTAINER_REGISTRY: projectboseacr
     CLUSTER_NAME: projectboseaks
@@ -58,10 +59,18 @@ jobs:
                 cluster-name: ${{ env.CLUSTER_NAME }}
                 resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
                 use-kubelogin: "true"
+
+            - name: Create namespace
+              run: |
+                namespacePresent=`kubectl get namespace | grep ${{ env.NAMESPACE  }} | wc -l`
+                if [ $namespacePresent -eq 0 ]
+                then
+                  echo `kubectl create namespace ${{ env.NAMESPACE  }}`
+                fi
             - uses: Azure/k8s-deploy@v4
               name: Deploys application
               with:
                 action: deploy
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}-mysql
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-                namespace: projectbose
+                namespace: ${{ env.NAMESPACE  }}

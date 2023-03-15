@@ -5,6 +5,7 @@ name: projectbose
             - db
     workflow_dispatch: {}
 env:
+    NAMESPACE: projectbose
     ACR_RESOURCE_GROUP: projectboserg
     AZURE_CONTAINER_REGISTRY: projectboseacr
     CLUSTER_NAME: projectboseaks
@@ -54,6 +55,13 @@ jobs:
               name: Set up kubelogin for non-interactive login
               with:
                 kubelogin-version: v0.0.25
+            - name: Create namespace
+              run: |
+                namespacePresent=`kubectl get namespace | grep ${{ env.NAMESPACE  }} | wc -l`
+                if [ $namespacePresent -eq 0 ]
+                then
+                  echo `kubectl create namespace ${{ env.NAMESPACE  }}`
+                fi
             - uses: azure/aks-set-context@v3
               name: Get K8s context
               with:
@@ -67,4 +75,4 @@ jobs:
                 action: deploy
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}-cassandra
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-                namespace: projectbose
+                namespace: ${{ env.NAMESPACE  }}
