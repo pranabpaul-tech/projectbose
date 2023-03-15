@@ -2,7 +2,7 @@ name: projectbose
 "on":
     push:
         branches:
-            - main
+            - db
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: projectboserg
