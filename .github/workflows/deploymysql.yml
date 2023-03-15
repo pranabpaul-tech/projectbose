@@ -14,6 +14,7 @@ env:
         ./manifests/mysqlsecret.yaml
         ./manifests/mysqlset.yaml
         ./manifests/mysqlservice.yaml
+        
 jobs:
     buildImage:
         permissions:
