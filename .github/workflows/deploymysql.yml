@@ -59,7 +59,6 @@ jobs:
                 cluster-name: ${{ env.CLUSTER_NAME }}
                 resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
                 use-kubelogin: "true"
-
             - name: Create namespace
               run: |
                 namespacePresent=`kubectl get namespace | grep ${{ env.NAMESPACE  }} | wc -l`
