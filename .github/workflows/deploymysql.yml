@@ -55,7 +55,7 @@ jobs:
             - uses: azure/aks-set-context@v3
               name: Get K8s context
               with:
-                admin: "false"
+                admin: "true"
                 cluster-name: ${{ env.CLUSTER_NAME }}
                 resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
                 use-kubelogin: "true"

@@ -55,6 +55,13 @@ jobs:
               name: Set up kubelogin for non-interactive login
               with:
                 kubelogin-version: v0.0.25
+            - uses: azure/aks-set-context@v3
+              name: Get K8s context
+              with:
+                admin: "true"
+                cluster-name: ${{ env.CLUSTER_NAME }}
+                resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+                use-kubelogin: "true"
             - name: Create namespace
               run: |
                 namespacePresent=`kubectl get namespace | grep ${{ env.NAMESPACE  }} | wc -l`
@@ -62,13 +69,6 @@ jobs:
                 then
                   echo `kubectl create namespace ${{ env.NAMESPACE  }}`
                 fi
-            - uses: azure/aks-set-context@v3
-              name: Get K8s context
-              with:
-                admin: "false"
-                cluster-name: ${{ env.CLUSTER_NAME }}
-                resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
-                use-kubelogin: "true"
             - uses: Azure/k8s-deploy@v4
               name: Deploys application
               with:
