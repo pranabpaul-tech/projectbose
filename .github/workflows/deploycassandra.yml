@@ -15,7 +15,7 @@ jobs:
       id: build-image
       run: |
         docker build "$GITHUB_WORKSPACE/db/cassandra" -f  "db/cassandra/Dockerfile" -t acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-cassandra --label dockerfile-path=db/cassandra/Dockerfile
-        docker push projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-cassandra
+        docker push acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-cassandra
 
     - uses: azure/k8s-set-context@v1
       with:
