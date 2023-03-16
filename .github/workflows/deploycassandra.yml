@@ -6,10 +6,10 @@ name: projectbose
     workflow_dispatch: {}
 env:
     NAMESPACE: projectbose
-    ACR_RESOURCE_GROUP: projectboserg
-    AZURE_CONTAINER_REGISTRY: projectboseacr
+    ACR_RESOURCE_GROUP: codenameprojectboserg
+    AZURE_CONTAINER_REGISTRY: acrprojectbose
     CLUSTER_NAME: projectboseaks
-    CLUSTER_RESOURCE_GROUP: projectboserg
+    CLUSTER_RESOURCE_GROUP: codenameprojectboserg
     CONTAINER_NAME: projectboseaks
     DEPLOYMENT_MANIFEST_PATH: |
         ./manifests/blob-secret.yaml
@@ -58,7 +58,7 @@ jobs:
             - uses: azure/aks-set-context@v3
               name: Get K8s context
               with:
-                admin: "true"
+                admin: "false"
                 cluster-name: ${{ env.CLUSTER_NAME }}
                 resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
                 use-kubelogin: "true"
