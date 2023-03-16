@@ -27,7 +27,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: azure/login@v1.4.3
+            - uses: azure/login@v1.4.6
               name: Azure login
               with:
                 client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -45,7 +45,7 @@ jobs:
             - buildImage
         steps:
             - uses: actions/checkout@v3
-            - uses: azure/login@v1.4.3
+            - uses: azure/login@v1.4.6
               name: Azure login
               with:
                 client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -69,6 +69,13 @@ jobs:
                 then
                   echo `kubectl create namespace ${{ env.NAMESPACE  }}`
                 fi
+            - uses: azure/k8s-create-secret@v1
+              with:
+                namespace: ${{ env.NAMESPACE  }}
+                container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+                container-registry-username: ${{ secrets.ACR_ACRPROJECTBOSE_USERNAME }}
+                container-registry-password: ${{ secrets.ACR_ACRPROJECTBOSE_PASSWORD }}
+                secret-name: projectboseadockerauth
             - uses: Azure/k8s-deploy@v4
               name: Deploys application
               with:
@@ -76,3 +83,5 @@ jobs:
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}-cassandra
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
                 namespace: ${{ env.NAMESPACE  }}
+                imagepullsecrets: |
+                  projectboseadockerauth

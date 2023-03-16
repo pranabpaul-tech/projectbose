@@ -66,6 +66,13 @@ jobs:
                 then
                   echo `kubectl create namespace ${{ env.NAMESPACE  }}`
                 fi
+            - uses: azure/k8s-create-secret@v1
+              with:
+                namespace: ${{ env.NAMESPACE  }}
+                container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+                container-registry-username: ${{ secrets.ACR_ACRPROJECTBOSE_USERNAME }}
+                container-registry-password: ${{ secrets.ACR_ACRPROJECTBOSE_PASSWORD }}
+                secret-name: projectboseadockerauth
             - uses: Azure/k8s-deploy@v4
               name: Deploys application
               with:
@@ -73,3 +80,5 @@ jobs:
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}-mysql
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
                 namespace: ${{ env.NAMESPACE  }}
+                imagepullsecrets: |
+                  projectboseadockerauth
