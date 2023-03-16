@@ -1,87 +1,55 @@
-name: projectbose
-"on":
-    push:
-        branches:
-            - db
-    workflow_dispatch: {}
-env:
-    NAMESPACE: projectbose
-    ACR_RESOURCE_GROUP: codenameprojectboserg
-    AZURE_CONTAINER_REGISTRY: acrprojectbose
-    CLUSTER_NAME: projectboseaks
-    CLUSTER_RESOURCE_GROUP: codenameprojectboserg
-    CONTAINER_NAME: projectboseaks
-    DEPLOYMENT_MANIFEST_PATH: |
-        ./manifests/blob-secret.yaml
-        ./manifests/pv-blob-input.yaml
-        ./manifests/pv-blob-output.yaml
-        ./manifests/pvc-blob-input.yaml
-        ./manifests/pvc-blob-output.yaml
-        ./manifests/cassandraset.yaml
-        ./manifests/cassandraservice.yaml
+on: [push]
 jobs:
-    buildImage:
-        permissions:
-            contents: read
-            id-token: write
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: azure/login@v1.4.6
-              name: Azure login
-              with:
-                client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-            - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }}-cassandra --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f db/cassandra/Dockerfile ./
-    deploy:
-        permissions:
-            actions: read
-            contents: read
-            id-token: write
-        runs-on: ubuntu-latest
-        needs:
-            - buildImage
-        steps:
-            - uses: actions/checkout@v3
-            - uses: azure/login@v1.4.6
-              name: Azure login
-              with:
-                client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-            - uses: azure/use-kubelogin@v1
-              name: Set up kubelogin for non-interactive login
-              with:
-                kubelogin-version: v0.0.25
-            - uses: azure/aks-set-context@v3
-              name: Get K8s context
-              with:
-                admin: "false"
-                cluster-name: ${{ env.CLUSTER_NAME }}
-                resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
-                use-kubelogin: "true"
-            - name: Create namespace
-              run: |
-                namespacePresent=`kubectl get namespace | grep ${{ env.NAMESPACE  }} | wc -l`
-                if [ $namespacePresent -eq 0 ]
-                then
-                  echo `kubectl create namespace ${{ env.NAMESPACE  }}`
-                fi
-            - uses: azure/k8s-create-secret@v1
-              with:
-                namespace: ${{ env.NAMESPACE  }}
-                container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
-                container-registry-username: ${{ secrets.ACR_ACRPROJECTBOSE_USERNAME }}
-                container-registry-password: ${{ secrets.ACR_ACRPROJECTBOSE_PASSWORD }}
-                secret-name: projectboseadockerauth
-            - uses: Azure/k8s-deploy@v4
-              name: Deploys application
-              with:
-                action: deploy
-                images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}-cassandra
-                manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-                namespace: ${{ env.NAMESPACE  }}
-                imagepullsecrets: |
-                  projectboseadockerauth
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: acrprojectbose.azurecr.io
+        username: ${{ secrets.acr_acrprojectbose_username }}
+        password: ${{ secrets.acr_acrprojectbose_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/db/cassandra" -f  "db/cassandra/Dockerfile" -t acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-cassandra --label dockerfile-path=db/cassandra/Dockerfile
+        docker push projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-cassandra
+
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_projectboseaks_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep projectbose | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace projectbose`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: projectbose
+        container-registry-url: acrprojectbose.azurecr.io
+        container-registry-username: ${{ secrets.acr_acrprojectbose_username }}
+        container-registry-password: ${{ secrets.acr_acrprojectbose_password }}
+        secret-name: projectboseadockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: projectbose
+        manifests: |
+          manifests/blob-secret.yaml
+          manifests/pv-blob-input.yaml
+          manifests/pv-blob-output.yaml
+          manifests/pvc-blob-input.yaml
+          manifests/pvc-blob-output.yaml
+          manifests/cassandraset.yaml
+          manifests/cassandraservice.yaml
+        images: |
+          acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-cassandra
+        imagepullsecrets: |
+          projectboseadockerauth
