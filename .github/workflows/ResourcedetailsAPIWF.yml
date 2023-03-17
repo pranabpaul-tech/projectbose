@@ -1,7 +1,7 @@
-name: PreparedataAPIStaging
+name: ResourcedetailsAPIStaging
 on: [push]
 env: 
-  NAMESPACE: staging
+  NAMESPACE: projectbose
 
 jobs:
   build-and-deploy:
@@ -11,15 +11,15 @@ jobs:
     
     - uses: azure/docker-login@v1
       with:
-        login-server: projectboseacr.azurecr.io
-        username: ${{ secrets.acr_projectboseacr_username }}
-        password: ${{ secrets.acr_projectboseacr_password }}
+        login-server: acrprojectbose.azurecr.io
+        username: ${{ secrets.acr_acrprojectbose_username }}
+        password: ${{ secrets.acr_acrprojectbose_password }}
     
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/api/API/PrepareDataAPI" -f  "api/API/PrepareDataAPI/Dockerfile" -t projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-preparedata --label dockerfile-path=api/API/PrepareDataAPI/Dockerfile
-        docker push projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-preparedata
+        docker build "$GITHUB_WORKSPACE/api/API/ResourcedetailsAPI" -f  "api/API/ResourcedetailsAPI/Dockerfile" -t acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-resourcedetails --label dockerfile-path=api/API/ResourcedetailsAPI/Dockerfile
+        docker push acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-resourcedetails
     
     - uses: azure/k8s-set-context@v1
       with:
@@ -37,18 +37,18 @@ jobs:
     - uses: azure/k8s-create-secret@v1
       with:
         namespace: ${{ env.NAMESPACE  }}
-        container-registry-url: projectboseacr.azurecr.io
-        container-registry-username: ${{ secrets.acr_projectboseacr_username }}
-        container-registry-password: ${{ secrets.acr_projectboseacr_password }}
+        container-registry-url: acrprojectbose.azurecr.io
+        container-registry-username: ${{ secrets.acr_acrprojectbose_username }}
+        container-registry-password: ${{ secrets.acr_acrprojectbose_password }}
         secret-name: projectboseadockerauth
        
     - uses: azure/k8s-deploy@v1.2
       with:
         namespace: ${{ env.NAMESPACE  }}
         manifests: |
-          manifests/deployPreparedataAPI.yml
-          manifests/servicePreparedataAPI.yml
+          manifests/deployResourcedetailsAPI.yml
+          manifests/serviceResourcedetailsAPI.yml
         images: |
-          projectboseacr.azurecr.io/projectboseaks:${{ github.sha }}-preparedata
+          acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-resourcedetails
         imagepullsecrets: |
           projectboseadockerauth

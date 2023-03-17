@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\api\\API",
+    "\\api\\API\\LeveldetailsAPI",
+    "\\api\\API\\LeveldetailsAPI\\Controllers",
+    "\\api\\API\\PrepareDataAPI\\Controllers"
   ],
-  "SelectedNode": "\\API.sln",
+  "SelectedNode": "\\api",
   "PreviewInSolutionExplorer": false
 }

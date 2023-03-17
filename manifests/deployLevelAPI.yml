@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: "leveldeploy"
-          image: "projectboseacr.azurecr.io/projectboseaks"
+          image: "acrprojectbose.azurecr.io/projectboseaks"
           ports:
           - containerPort: 80

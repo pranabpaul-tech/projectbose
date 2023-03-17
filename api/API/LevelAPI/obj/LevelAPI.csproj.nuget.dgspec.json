@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj": {}
+    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj": {
+    "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj",
+        "projectUniqueName": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj",
         "projectName": "LevelAPI",
-        "projectPath": "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj",
+        "projectPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\LevelAPI\\LevelAPI.csproj",
         "packagesPath": "C:\\Users\\pranabp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pranabp\\source\\projectbose\\api\\API\\LevelAPI\\obj\\",
+        "outputPath": "C:\\Users\\pranabp\\source\\repos\\projectbose\\api\\API\\LevelAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

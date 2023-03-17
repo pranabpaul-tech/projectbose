@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: "resourcedetailsdeploy"
-          image: "projectboseacr.azurecr.io/projectboseaks"
+          image: "acrprojectbose.azurecr.io/projectboseaks"
           ports:
           - containerPort: 80
