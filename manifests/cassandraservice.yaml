@@ -6,6 +6,7 @@ metadata:
   name: cassandraservice
 spec:
   clusterIP: None
+  #########################
   ports:
   - name: 9160-9160
     port: 9160

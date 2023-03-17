@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-blob-input-staging
+  name: pv-blob-output
 spec:
   capacity:
     storage: 10Gi
@@ -17,9 +17,9 @@ spec:
     readOnly: false
     # make sure volumeid is unique for every identical storage blob container in the cluster
     # character `#` is reserved for internal use and cannot be used in volumehandle
-    volumeHandle: cassandra-blob-input
+    volumeHandle: cassandra-blob-output
     volumeAttributes:
-      containerName: input
+      containerName: output
     nodeStageSecretRef:
-      name: blob-secret-staging
-      namespace: staging
+      name: blob-secret
+      namespace: projectbose

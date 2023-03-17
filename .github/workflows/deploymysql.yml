@@ -1,0 +1,53 @@
+on: [push]
+env: 
+  NAMESPACE: production
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: acrprojectbose.azurecr.io
+        username: ${{ secrets.acr_acrprojectbose_username }}
+        password: ${{ secrets.acr_acrprojectbose_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/db/mysql" -f  "db/mysql/Dockerfile" -t acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-mysql --label dockerfile-path=db/mysql/Dockerfile
+        docker push acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-mysql
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_projectboseaks_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep projectbose | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace projectbose`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: projectbose
+        container-registry-url: acrprojectbose.azurecr.io
+        container-registry-username: ${{ secrets.acr_acrprojectbose_username }}
+        container-registry-password: ${{ secrets.acr_acrprojectbose_password }}
+        secret-name: projectboseadockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: projectbose
+        manifests: |
+          manifests/mysqlsecret.yaml
+          manifests/mysqlset.yaml
+          manifests/mysqlservice.yaml
+        images: |
+          acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-mysql
+        imagepullsecrets: |
+          projectboseadockerauth

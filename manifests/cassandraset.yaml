@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: cassandra-container
-        image: projectboseacr.azurecr.io/projectboseaks
+        image: acrprojectbose.azurecr.io/projectboseaks
         ports:
         - containerPort: 9160
           name: regularport
@@ -31,10 +31,10 @@ spec:
       volumes:
         - name: blobinputstaging
           persistentVolumeClaim:
-            claimName: pvc-blob-input-staging
+            claimName: pvc-blob-input
         - name: bloboutputstaging
           persistentVolumeClaim:
-            claimName: pvc-blob-output-staging
+            claimName: pvc-blob-output
   volumeClaimTemplates:
   - metadata:
       name: cassandra-vol

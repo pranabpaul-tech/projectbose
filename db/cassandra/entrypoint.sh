@@ -73,6 +73,5 @@ apt install cron
 cp /insertdata.py /mnt/blob/input/insertdata.py
 # chmod +x  /var/spool/cron/crontabs/crontab
 chmod +x  /mnt/blob/input/insertdata.py
-# /etc/init.d/cron start 
 # Call the new entrypoint
 $EP "$@"
