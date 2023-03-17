@@ -22,4 +22,4 @@ spec:
       containerName: output
     nodeStageSecretRef:
       name: blob-secret
-      #namespace: staging
+      namespace: projectbose
