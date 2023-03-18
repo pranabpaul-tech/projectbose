@@ -44,9 +44,11 @@ jobs:
     - uses: azure/k8s-deploy@v1.2
       with:
         namespace: ${{ env.NAMESPACE  }}
+        # additinal template for ingress in this
         manifests: |
           manifests/deployResourcedetailsAPI.yml
           manifests/serviceResourcedetailsAPI.yml
+          manifests/apiIngress.yml
         images: |
           acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-resourcedetails
         imagepullsecrets: |
