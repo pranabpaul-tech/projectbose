@@ -48,7 +48,6 @@ jobs:
         manifests: |
           manifests/deployResourcedetailsAPI.yml
           manifests/serviceResourcedetailsAPI.yml
-          manifests/apiIngress.yml
         images: |
           acrprojectbose.azurecr.io/projectboseaks:${{ github.sha }}-resourcedetails
         imagepullsecrets: |
