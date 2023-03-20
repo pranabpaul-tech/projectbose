@@ -381,7 +381,7 @@
       },
       "properties": {
         "repositoryUrl": "https://github.com/pranabpaul-tech/projectbose",
-        "branch": "main",
+        "branch": "apps",
         "stagingEnvironmentPolicy": "Enabled",
         "allowConfigFileUpdates": true,
         "provider": "GitHub",
