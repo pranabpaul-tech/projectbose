@@ -1,9 +1,0 @@
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "BlobConnectionString": "<blob connection string>",
-    "ResourceLevelAPI": "http://<api url>/api/PrepareData/resourcelevel"
-  }
-}
